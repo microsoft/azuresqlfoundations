@@ -1,7 +1,8 @@
 # DMS CLI Migration Scripts — SQL Server → Azure SQL Database Hyperscale
 
 > For a guided, approve-each-step walkthrough (setup → assess → provision →
-> DMS+SHIR → migrate → validate), see [SKILL.md](../SKILL.md). Ready-to-paste
+> DMS+SHIR → migrate → validate), see the Act 1 skill
+> [SKILL.md](../../../.github/skills/zava-act1-migrate/SKILL.md). Ready-to-paste
 > prompts are in [prompts.md](prompts.md). This README is the human reference for
 > the individual scripts.
 
