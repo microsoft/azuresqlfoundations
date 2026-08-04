@@ -8,6 +8,10 @@ intelligent with native vector search and AI scoring.
 
 > Same database. Three acts. One platform.
 
+> 📺 **This workshop is a companion to the Azure SQL Foundations video series:**
+> **<https://aka.ms/azuresqlfoundationseries>**. Watch the videos to see the story,
+> then use this repo to run the same three acts hands-on.
+
 > ▶ **Using GitHub Copilot?** Open Copilot Chat in **Agent mode** and say
 > *"Let's go through the workshop examples"* — the repo's skills drive the whole thing.
 > See [Run it with GitHub Copilot](#run-it-with-github-copilot-skills--prompts).
