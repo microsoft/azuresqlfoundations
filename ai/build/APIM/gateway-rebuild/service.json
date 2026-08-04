@@ -1,0 +1,83 @@
+{
+  "additionalLocations": null,
+  "apiVersionConstraint": {
+    "minApiVersion": null
+  },
+  "certificates": null,
+  "createdAtUtc": "2026-04-03T17:49:07.666454+00:00",
+  "customProperties": {
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+    "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
+  },
+  "developerPortalUrl": null,
+  "disableGateway": null,
+  "enableClientCertificate": false,
+  "etag": "AAAAANlssWI=",
+  "gatewayRegionalUrl": null,
+  "gatewayUrl": "https://zavafin-ai-gateway.azure-api.net",
+  "hostnameConfigurations": [
+    {
+      "certificate": null,
+      "certificatePassword": null,
+      "certificateSource": "BuiltIn",
+      "certificateStatus": null,
+      "defaultSslBinding": true,
+      "encodedCertificate": null,
+      "hostName": "zavafin-ai-gateway.azure-api.net",
+      "identityClientId": null,
+      "keyVaultId": null,
+      "negotiateClientCertificate": false,
+      "type": "Proxy"
+    }
+  ],
+  "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway",
+  "identity": {
+    "principalId": "<your-principal-id>",
+    "tenantId": "<your-tenant-id>",
+    "type": "SystemAssigned",
+    "userAssignedIdentities": null
+  },
+  "location": "East US 2",
+  "managementApiUrl": "https://smapi.api-bn1-prod-scaleunit-003.p.azurewebsites.net/",
+  "name": "zavafin-ai-gateway",
+  "natGatewayState": "Enabled",
+  "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+  "outboundPublicIpAddresses": [],
+  "platformVersion": "undetermined",
+  "portalUrl": null,
+  "privateEndpointConnections": null,
+  "privateIpAddresses": null,
+  "provisioningState": "Succeeded",
+  "publicIpAddressId": null,
+  "publicIpAddresses": null,
+  "publicNetworkAccess": "Enabled",
+  "publisherEmail": "<your-email>",
+  "publisherName": "ZavaFin",
+  "resourceGroup": "<your-resource-group>",
+  "restore": null,
+  "scmUrl": null,
+  "sku": {
+    "capacity": 2,
+    "name": "StandardV2"
+  },
+  "systemData": {
+    "createdAt": null,
+    "createdBy": null,
+    "createdByType": null,
+    "lastModifiedAt": "2026-06-29T16:10:54.177257+00:00",
+    "lastModifiedBy": "<your-email>",
+    "lastModifiedByType": "User"
+  },
+  "tags": {},
+  "targetProvisioningState": "",
+  "type": "Microsoft.ApiManagement/service",
+  "virtualNetworkConfiguration": null,
+  "virtualNetworkType": "None",
+  "zones": null
+}

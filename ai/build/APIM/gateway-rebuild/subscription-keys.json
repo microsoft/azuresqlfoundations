@@ -1,0 +1,8 @@
+{
+  "master": {
+    "secondaryKey": "<your-apim-subscription-key-secondary>",
+    "scope": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/",
+    "displayName": "Built-in all-access subscription",
+    "primaryKey": "<your-apim-subscription-key>"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "apimName": "zavafin-ai-gateway",
+  "gatewayUrl": "https://zavafin-ai-gateway.azure-api.net",
+  "subscriptionKey": "<your-apim-subscription-key>",
+  "gatewayHost": "zavafin-ai-gateway.azure-api.net"
+}

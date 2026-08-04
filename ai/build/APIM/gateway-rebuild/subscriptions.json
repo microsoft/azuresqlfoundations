@@ -1,0 +1,17 @@
+{
+  "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/subscriptions/master",
+  "type": "Microsoft.ApiManagement/service/subscriptions",
+  "name": "master",
+  "properties": {
+    "scope": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/",
+    "displayName": "Built-in all-access subscription",
+    "state": "active",
+    "createdDate": "2026-04-04T21:16:12.44Z",
+    "startDate": null,
+    "expirationDate": null,
+    "endDate": null,
+    "notificationDate": null,
+    "stateComment": null,
+    "allowTracing": false
+  }
+}

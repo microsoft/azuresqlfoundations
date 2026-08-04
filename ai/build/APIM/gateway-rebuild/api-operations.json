@@ -1,0 +1,28 @@
+[
+  {
+    "description": null,
+    "displayName": "Chat Completions",
+    "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/apis/azure-openai-api/operations/chat-completions",
+    "method": "POST",
+    "name": "chat-completions",
+    "policies": null,
+    "request": null,
+    "resourceGroup": "<your-resource-group>",
+    "responses": [],
+    "templateParameters": [
+      {
+        "defaultValue": null,
+        "description": "Model deployment name",
+        "examples": null,
+        "name": "deployment-id",
+        "required": true,
+        "schemaId": null,
+        "type": "string",
+        "typeName": null,
+        "values": []
+      }
+    ],
+    "type": "Microsoft.ApiManagement/service/apis/operations",
+    "urlTemplate": "/deployments/{deployment-id}/chat/completions"
+  }
+]

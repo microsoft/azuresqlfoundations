@@ -1,0 +1,6 @@
+{
+  "appName": "zavafin-loan-mcp",
+  "healthUrl": "https://zavafin-loan-mcp.<your-aca-env>.<region>.azurecontainerapps.io/health",
+  "fqdn": "zavafin-loan-mcp.<your-aca-env>.<region>.azurecontainerapps.io",
+  "mcpUrl": "https://zavafin-loan-mcp.<your-aca-env>.<region>.azurecontainerapps.io/mcp"
+}

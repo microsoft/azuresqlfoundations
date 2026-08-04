@@ -1,0 +1,30 @@
+[
+  {
+    "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/backends/contentsafety-backend",
+    "type": "Microsoft.ApiManagement/service/backends",
+    "name": "contentsafety-backend",
+    "properties": {
+      "title": null,
+      "url": "https://<your-ai-account>.cognitiveservices.azure.com",
+      "protocol": "http",
+      "credentials": {
+        "header": {
+          "api-key": [
+            "{{aoai-key}}"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/backends/phi4-backend",
+    "type": "Microsoft.ApiManagement/service/backends",
+    "name": "phi4-backend",
+    "properties": {
+      "title": null,
+      "description": "Azure AI Services - Phi-4",
+      "url": "https://<your-ai-account>.cognitiveservices.azure.com/openai",
+      "protocol": "http"
+    }
+  }
+]

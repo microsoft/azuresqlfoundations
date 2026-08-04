@@ -1,0 +1,23 @@
+<policies>
+  <inbound>
+    <base />
+    <set-backend-service backend-id="phi4-backend" />
+    <set-header name="api-key" exists-action="override">
+      <value>{{aoai-key}}</value>
+    </set-header>
+    <azure-openai-token-limit tokens-per-minute="10000" counter-key="@(context.Subscription.Id)" estimate-prompt-tokens="true" />
+    <azure-openai-emit-token-metric namespace="zavafin-ai-gateway">
+      <dimension name="Subscription" value="@(context.Subscription.Id)" />
+      <dimension name="API" value="@(context.Api.Name)" />
+    </azure-openai-emit-token-metric>
+  </inbound>
+  <backend>
+    <forward-request timeout="120" />
+  </backend>
+  <outbound>
+    <base />
+  </outbound>
+  <on-error>
+    <base />
+  </on-error>
+</policies>

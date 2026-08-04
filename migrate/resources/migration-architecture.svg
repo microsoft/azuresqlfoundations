@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef3f8"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a3ea3"/>
+      <stop offset="1" stop-color="#c4399a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- canvas -->
+  <rect width="1280" height="720" fill="url(#bg)"/>
+
+  <!-- title -->
+  <text x="40" y="52" font-size="30" font-weight="700" fill="#16334d">SQL Server to Azure SQL Database Hyperscale</text>
+  <text x="40" y="82" font-size="17" fill="#5a6b7b">Offline migration with Azure Database Migration Service (DMS) + Self-Hosted Integration Runtime (SHIR)</text>
+
+  <!-- ===================== ARCHITECTURE ZONE ===================== -->
+
+  <!-- SOURCE HOST -->
+  <rect x="40" y="111" width="430" height="262" rx="14" fill="#dfe4ea"/>
+  <rect x="40" y="108" width="430" height="262" rx="14" fill="#ffffff" stroke="#c4ccd4" stroke-width="1.5"/>
+  <path d="M54,108 H456 a14,14 0 0 1 14,14 V148 H40 V122 a14,14 0 0 1 14,-14 Z" fill="#4a4f57"/>
+  <text x="62" y="135" font-size="17" font-weight="700" fill="#ffffff">Source host - single box (on-prem)</text>
+
+  <!-- az CLI -->
+  <rect x="64" y="158" width="382" height="54" rx="10" fill="#e9f1fb" stroke="#0078d4"/>
+  <text x="84" y="182" font-size="15" font-weight="700" fill="#0a4c8b">az datamigration CLI</text>
+  <text x="84" y="201" font-size="12" fill="#356a9e">drives the DMS (4b); deploys schema directly (4a)</text>
+
+  <!-- SHIR -->
+  <rect x="64" y="224" width="382" height="54" rx="10" fill="#fdf3e7" stroke="#e6a23c"/>
+  <text x="84" y="248" font-size="15" font-weight="700" fill="#9a5b00">SHIR</text>
+  <text x="138" y="248" font-size="13" fill="#7a5a2a">Self-Hosted Integration Runtime</text>
+  <text x="84" y="267" font-size="12" fill="#9a5b00">moves the data; registered to the Azure DMS</text>
+
+  <!-- source SQL Server -->
+  <rect x="64" y="296" width="382" height="60" rx="10" fill="#eef1f4" stroke="#b9c2cb"/>
+  <text x="84" y="323" font-size="17" font-weight="700" fill="#243a5e">SQL Server 2019</text>
+  <text x="84" y="344" font-size="13" fill="#5a6b7b">source database - reachable as localhost</text>
+
+  <!-- read arrow: SHIR -> SQL Server -->
+  <line x1="130" y1="278" x2="130" y2="288" stroke="#9a5b00" stroke-width="3"/>
+  <polygon points="130,296 123,283 137,283" fill="#9a5b00"/>
+  <text x="150" y="291" font-size="11.5" font-weight="700" fill="#9a5b00">reads source (SQL auth)</text>
+
+  <!-- AZURE -->
+  <rect x="810" y="111" width="430" height="262" rx="14" fill="#cfe0f1"/>
+  <rect x="810" y="108" width="430" height="262" rx="14" fill="#ffffff" stroke="#9cc3e8" stroke-width="1.5"/>
+  <path d="M824,108 H1226 a14,14 0 0 1 14,14 V148 H810 V122 a14,14 0 0 1 14,-14 Z" fill="#0a4c8b"/>
+  <text x="832" y="135" font-size="17" font-weight="700" fill="#ffffff">Microsoft Azure</text>
+
+  <!-- DMS service -->
+  <rect x="834" y="158" width="382" height="64" rx="10" fill="#efe7f6" stroke="#7a3ea3"/>
+  <text x="854" y="184" font-size="15" font-weight="700" fill="#5a2a86">Azure Database Migration Service (DMS)</text>
+  <text x="854" y="206" font-size="12.5" fill="#6f4a96">control plane - orchestrates the SHIR (no data flows through it)</text>
+
+  <!-- logical server (contains the DB) -->
+  <rect x="834" y="238" width="382" height="118" rx="10" fill="#eef1f4" stroke="#b9c2cb"/>
+  <text x="854" y="260" font-size="15" font-weight="700" fill="#243a5e">Logical server</text>
+  <text x="854" y="279" font-size="12" fill="#5a6b7b">firewall rule - SQL admin - optional Entra admin</text>
+
+  <!-- hyperscale DB nested in logical server -->
+  <rect x="852" y="288" width="346" height="66" rx="9" fill="#e9f1fb" stroke="#0078d4"/>
+  <text x="870" y="314" font-size="14.5" font-weight="700" fill="#0a4c8b">Azure SQL Database - Hyperscale</text>
+  <text x="870" y="336" font-size="12" fill="#356a9e">empty target - schema then data - create-time ZR decision</text>
+
+  <!-- ===== cross-gap flows (orthogonal, non-crossing) ===== -->
+  <!-- CLI drives the DMS (control) - straight horizontal across the top -->
+  <line x1="446" y1="176" x2="820" y2="176" stroke="#6b7785" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <polygon points="834,176 820,170 820,182" fill="#6b7785"/>
+  <rect x="548" y="165" width="184" height="22" rx="11" fill="#eef1f4" stroke="#6b7785"/>
+  <text x="640" y="180" font-size="12" font-weight="700" fill="#46525e" text-anchor="middle">drives the DMS (control)</text>
+
+  <!-- 4a schema deploy: CLI -> DB (direct, outer lane so it never crosses 4b) -->
+  <path d="M446,205 H800 V295 H840" fill="none" stroke="#0078d4" stroke-width="4" stroke-dasharray="8 5"/>
+  <polygon points="852,295 838,289 838,301" fill="#0078d4"/>
+  <rect x="486" y="194" width="228" height="22" rx="11" fill="#e9f1fb" stroke="#0078d4"/>
+  <text x="600" y="209" font-size="12" font-weight="700" fill="#0a4c8b" text-anchor="middle">4a - schema deploy (direct DacFx)</text>
+
+  <!-- 4b data copy: SHIR -> DB (inner lane) -->
+  <path d="M446,258 H740 V322 H840" fill="none" stroke="url(#flow)" stroke-width="6"/>
+  <polygon points="852,322 838,315 838,329" fill="#c4399a"/>
+  <rect x="476" y="247" width="240" height="22" rx="11" fill="#fbeef6" stroke="#c4399a"/>
+  <text x="596" y="262" font-size="12.5" font-weight="700" fill="#a4267f" text-anchor="middle">4b - data copy (via SHIR)</text>
+
+  <!-- control plane: DMS orchestrates the SHIR (backplane loop under both zones - no crossings) -->
+  <path d="M1216,206 H1226 V388 H52 V251 H64" fill="none" stroke="#7a3ea3" stroke-width="2.5" stroke-dasharray="2 6" stroke-linecap="round"/>
+  <polygon points="64,251 52,246 52,256" fill="#7a3ea3"/>
+  <rect x="494" y="377" width="292" height="22" rx="11" fill="#efe7f6" stroke="#7a3ea3"/>
+  <text x="640" y="392" font-size="12" font-weight="700" fill="#5a2a86" text-anchor="middle">control plane - DMS orchestrates the SHIR</text>
+
+  <!-- ===================== PHASE PIPELINE ===================== -->
+  <text x="40" y="424" font-size="18" font-weight="700" fill="#16334d">Migration phases</text>
+  <rect x="222" y="407" width="280" height="26" rx="13" fill="#eef7f0" stroke="#107c41"/>
+  <path d="M243,411 C244.4,417.6 245.4,418.6 252,420 C245.4,421.4 244.4,422.4 243,429 C241.6,422.4 240.6,421.4 234,420 C240.6,418.6 241.6,417.6 243,411 Z" fill="#107c41"/>
+  <text x="262" y="424" font-size="12.5" font-weight="700" fill="#0c5e32">Driven by Copilot + SKILL.md</text>
+
+  <!-- chevrons -->
+  <g>
+    <!-- Phase 0 -->
+    <path d="M40,448 L228,448 L250,498 L228,548 L40,548 L62,498 Z" fill="#1b4f86"/>
+    <text x="150" y="488" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">0 - Setup</text>
+    <text x="150" y="508" font-size="11.5" fill="#cfe0f1" text-anchor="middle">00-setup.ps1</text>
+    <text x="150" y="526" font-size="10.5" fill="#aecae6" text-anchor="middle">install datamigration CLI</text>
+
+    <!-- Phase 1 -->
+    <path d="M256,448 L444,448 L466,498 L444,548 L256,548 L278,498 Z" fill="#1f5c97"/>
+    <text x="366" y="488" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">1 - Assess</text>
+    <text x="366" y="508" font-size="11.5" fill="#cfe0f1" text-anchor="middle">01-assess.ps1</text>
+    <text x="366" y="526" font-size="10.5" fill="#aecae6" text-anchor="middle">issues, blockers, Service Broker</text>
+
+    <!-- Phase 2 -->
+    <path d="M472,448 L660,448 L682,498 L660,548 L472,548 L494,498 Z" fill="#23699a"/>
+    <text x="582" y="482" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">2 - Provision</text>
+    <text x="582" y="502" font-size="11.5" fill="#cfe0f1" text-anchor="middle">02-provision.ps1</text>
+    <text x="582" y="520" font-size="10.5" fill="#aecae6" text-anchor="middle">server + empty Hyperscale DB</text>
+    <text x="582" y="536" font-size="10.5" fill="#aecae6" text-anchor="middle">firewall - ZR decision</text>
+
+    <!-- Phase 3 -->
+    <path d="M688,448 L876,448 L898,498 L876,548 L688,548 L710,498 Z" fill="#1f7fae"/>
+    <text x="798" y="488" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">3 - DMS + SHIR</text>
+    <text x="798" y="508" font-size="11.5" fill="#cfe0f1" text-anchor="middle">03-dms-shir.ps1</text>
+    <text x="798" y="526" font-size="10.5" fill="#aecae6" text-anchor="middle">create DMS - register SHIR</text>
+
+    <!-- Phase 4 -->
+    <path d="M904,448 L1092,448 L1114,498 L1092,548 L904,548 L926,498 Z" fill="#9a2f7a"/>
+    <text x="1010" y="478" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">4 - Migrate</text>
+    <text x="1010" y="497" font-size="11.5" fill="#f2d6e9" text-anchor="middle">04-migrate.ps1</text>
+    <text x="1010" y="514" font-size="10.5" fill="#e9c4dd" text-anchor="middle">4pre check - 4a schema</text>
+    <text x="1010" y="530" font-size="10.5" fill="#e9c4dd" text-anchor="middle">4b data copy + wait</text>
+
+    <!-- Phase 5 -->
+    <path d="M1120,448 L1240,448 L1240,548 L1120,548 L1142,498 Z" fill="#107c41"/>
+    <text x="1186" y="488" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">5 - Validate</text>
+    <text x="1186" y="508" font-size="11" fill="#d4ecdc" text-anchor="middle">05-validate.ps1</text>
+    <text x="1186" y="526" font-size="10" fill="#bfe0cb" text-anchor="middle">row counts match</text>
+  </g>
+
+  <!-- footer band: key truths -->
+  <rect x="40" y="576" width="1200" height="118" rx="12" fill="#ffffff" stroke="#d4dbe2"/>
+  <rect x="40" y="576" width="8" height="118" rx="4" fill="#0078d4"/>
+
+  <text x="68" y="606" font-size="14.5" font-weight="700" fill="#16334d">Key truths</text>
+  <text x="68" y="630" font-size="13" fill="#41566a">- DMS to Azure SQL DB is offline only - data copy is a point-in-time snapshot; post-copy source changes are not carried over.</text>
+  <text x="68" y="652" font-size="13" fill="#41566a">- Hyperscale is a normal Azure SQL DB target - pick a Hyperscale SKU; zone redundancy is set at create time only.</text>
+  <text x="68" y="674" font-size="13" fill="#41566a">- The SHIR (registered to the DMS) reads the source and moves data to the target; reverse migration is not available.</text>
+</svg>

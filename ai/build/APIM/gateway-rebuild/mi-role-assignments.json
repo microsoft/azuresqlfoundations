@@ -1,0 +1,22 @@
+[
+  {
+    "condition": null,
+    "conditionVersion": null,
+    "createdBy": "<your-object-id>",
+    "createdOn": "2026-04-04T21:29:55.024444+00:00",
+    "delegatedManagedIdentityResourceId": null,
+    "description": null,
+    "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.CognitiveServices/accounts/<your-ai-account>/providers/Microsoft.Authorization/roleAssignments/<role-assignment-id>",
+    "name": "<role-assignment-id>",
+    "principalId": "<your-principal-id>",
+    "principalName": "<your-mi-client-id>",
+    "principalType": "ServicePrincipal",
+    "resourceGroup": "<your-resource-group>",
+    "roleDefinitionId": "/subscriptions/<your-subscription-id>/providers/Microsoft.Authorization/roleDefinitions/a97b65f3-24c7-4388-baec-2e87135dc908",
+    "roleDefinitionName": "Cognitive Services User",
+    "scope": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.CognitiveServices/accounts/<your-ai-account>",
+    "type": "Microsoft.Authorization/roleAssignments",
+    "updatedBy": "<your-object-id>",
+    "updatedOn": "2026-04-04T21:29:55.024444+00:00"
+  }
+]

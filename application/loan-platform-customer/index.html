@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zava Lending — Personal Loans Made Simple</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   Zava Lending — Customer-Facing Stylesheet
+   Modern fintech consumer UI · Light + gradient accents
+   ============================================================ */
+
+:root {
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --bg: #FAFBFC;
+    --white: #FFFFFF;
+    --text: #111827;
+    --text-2: #4B5563;
+    --text-3: #9CA3AF;
+    --border: #E5E7EB;
+    --indigo: #4F46E5;
+    --indigo-dark: #4338CA;
+    --indigo-light: #EEF2FF;
+    --green: #059669;
+    --green-bg: #ECFDF5;
+    --amber: #D97706;
+    --amber-bg: #FFFBEB;
+    --blue: #2563EB;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-full: 9999px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+    --shadow-xl: 0 20px 50px rgba(79,70,229,0.15);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* ─── Navbar ─── */
+.navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+}
+.nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; color: var(--text);
+}
+.nav-logo {
+    width: 34px; height: 34px;
+    background: var(--indigo);
+    color: white; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px;
+}
+.nav-brand-text { font-weight: 700; font-size: 17px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+    text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    color: var(--text-2);
+    transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--indigo); }
+.nav-cta {
+    padding: 8px 20px;
+    background: var(--indigo); color: white;
+    border: none; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: background 0.2s;
+    text-decoration: none;
+}
+.nav-cta:hover { background: var(--indigo-dark); }
+
+/* ─── Hero ─── */
+.hero {
+    padding: 140px 40px 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #EEF2FF 0%, var(--bg) 100%);
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    font-size: 13px; font-weight: 500; color: var(--text-2);
+    margin-bottom: 24px;
+}
+.hero-badge .dot {
+    width: 8px; height: 8px;
+    background: var(--green); border-radius: 50%;
+}
+.hero h1 {
+    font-size: 56px; font-weight: 800;
+    line-height: 1.1; letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    max-width: 720px; margin-left: auto; margin-right: auto;
+}
+.hero h1 .highlight {
+    background: linear-gradient(135deg, var(--indigo), #7C3AED);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.hero-sub {
+    font-size: 19px; color: var(--text-2);
+    max-width: 560px; margin: 0 auto 36px;
+    line-height: 1.6;
+}
+.hero-actions {
+    display: flex; justify-content: center; gap: 16px;
+    margin-bottom: 48px;
+}
+.btn-primary {
+    padding: 14px 32px;
+    background: var(--indigo); color: white;
+    border: none; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 16px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: var(--shadow-xl);
+    text-decoration: none;
+}
+.btn-primary:hover { background: var(--indigo-dark); transform: translateY(-1px); }
+.btn-secondary {
+    padding: 14px 32px;
+    background: var(--white); color: var(--text);
+    border: 1px solid var(--border); border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 16px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+}
+.btn-secondary:hover { border-color: var(--indigo); color: var(--indigo); }
+
+/* ─── Stats Row ─── */
+.stats-row {
+    display: flex; justify-content: center; gap: 64px;
+    padding: 0 40px 48px;
+}
+.stat { text-align: center; }
+.stat-value {
+    font-size: 32px; font-weight: 800; color: var(--text);
+    letter-spacing: -0.5px;
+}
+.stat-label {
+    font-size: 13px; font-weight: 500; color: var(--text-3);
+    margin-top: 4px;
+}
+
+/* ─── Rate Checker ─── */
+.rate-section {
+    padding: 80px 40px;
+    max-width: 1100px; margin: 0 auto;
+}
+.rate-section h2 {
+    font-size: 36px; font-weight: 800; text-align: center;
+    letter-spacing: -0.8px; margin-bottom: 12px;
+}
+.rate-section .section-sub {
+    text-align: center; color: var(--text-2); font-size: 16px;
+    margin-bottom: 48px;
+}
+.rate-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 48px;
+    box-shadow: var(--shadow-lg);
+    max-width: 680px; margin: 0 auto;
+}
+.rate-form { display: flex; flex-direction: column; gap: 24px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+    font-size: 13px; font-weight: 600; color: var(--text-2);
+}
+.form-group input, .form-group select {
+    padding: 12px 16px;
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+    font-family: var(--font); font-size: 15px; color: var(--text);
+    outline: none; transition: border 0.15s;
+}
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--indigo);
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+.rate-result {
+    display: none;
+    background: var(--indigo-light);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    margin-top: 8px;
+}
+.rate-result.visible { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.rate-result .rate-number {
+    font-size: 48px; font-weight: 800;
+    color: var(--indigo);
+    letter-spacing: -1px;
+}
+.rate-result .rate-label {
+    font-size: 14px; color: var(--text-2);
+    margin-top: 4px;
+}
+.rate-result .rate-monthly {
+    font-size: 16px; font-weight: 600;
+    color: var(--text); margin-top: 12px;
+}
+.rate-cta {
+    display: inline-block; margin-top: 16px;
+    padding: 10px 28px; background: var(--indigo); color: white;
+    border: none; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 14px; font-weight: 600;
+    cursor: pointer; text-decoration: none;
+}
+
+/* ─── Loan Types ─── */
+.loan-types {
+    padding: 80px 40px;
+    background: var(--white);
+}
+.loan-types h2 {
+    font-size: 36px; font-weight: 800; text-align: center;
+    letter-spacing: -0.8px; margin-bottom: 12px;
+}
+.loan-types .section-sub {
+    text-align: center; color: var(--text-2); font-size: 16px;
+    margin-bottom: 48px;
+}
+.types-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    max-width: 1100px; margin: 0 auto;
+}
+.type-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.type-card:hover {
+    border-color: var(--indigo);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+.type-icon {
+    width: 52px; height: 52px;
+    background: var(--indigo-light);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+}
+.type-card h3 {
+    font-size: 16px; font-weight: 700;
+    margin-bottom: 8px;
+}
+.type-card p {
+    font-size: 13px; color: var(--text-2);
+    line-height: 1.5;
+}
+.type-rate {
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px; color: var(--text-3);
+}
+.type-rate strong {
+    color: var(--indigo); font-size: 18px;
+}
+
+/* ─── How It Works ─── */
+.how-section {
+    padding: 80px 40px;
+    max-width: 1100px; margin: 0 auto;
+}
+.how-section h2 {
+    font-size: 36px; font-weight: 800; text-align: center;
+    letter-spacing: -0.8px; margin-bottom: 48px;
+}
+.steps-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.step-card {
+    text-align: center;
+    padding: 32px 24px;
+}
+.step-number {
+    width: 48px; height: 48px;
+    background: var(--indigo);
+    color: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 20px;
+    margin: 0 auto 20px;
+}
+.step-card h3 {
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 10px;
+}
+.step-card p {
+    font-size: 14px; color: var(--text-2);
+    line-height: 1.6;
+}
+
+/* ─── Testimonials ─── */
+.testimonials {
+    padding: 80px 40px;
+    background: var(--white);
+}
+.testimonials h2 {
+    font-size: 36px; font-weight: 800; text-align: center;
+    letter-spacing: -0.8px; margin-bottom: 48px;
+}
+.testimonial-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    max-width: 1100px; margin: 0 auto;
+}
+.testimonial-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+}
+.testimonial-stars {
+    color: #F59E0B; font-size: 16px;
+    margin-bottom: 12px;
+}
+.testimonial-text {
+    font-size: 14px; color: var(--text-2);
+    line-height: 1.7; margin-bottom: 16px;
+    font-style: italic;
+}
+.testimonial-author {
+    display: flex; align-items: center; gap: 12px;
+}
+.author-avatar {
+    width: 40px; height: 40px;
+    background: var(--indigo);
+    color: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+}
+.author-info .author-name {
+    font-size: 14px; font-weight: 600;
+}
+.author-info .author-detail {
+    font-size: 12px; color: var(--text-3);
+}
+
+/* ─── CTA Banner ─── */
+.cta-banner {
+    padding: 80px 40px;
+    text-align: center;
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+    color: white;
+}
+.cta-banner h2 {
+    font-size: 36px; font-weight: 800;
+    letter-spacing: -0.8px; margin-bottom: 16px;
+}
+.cta-banner p {
+    font-size: 18px; opacity: 0.85;
+    margin-bottom: 32px;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.cta-banner .btn-white {
+    padding: 14px 36px;
+    background: white; color: var(--indigo);
+    border: none; border-radius: var(--radius-full);
+    font-family: var(--font); font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+}
+.cta-banner .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+/* ─── Footer ─── */
+.footer {
+    padding: 40px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px; color: var(--text-3);
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+    text-decoration: none; color: var(--text-3);
+    font-size: 13px; font-weight: 500;
+}
+.footer-links a:hover { color: var(--indigo); }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+    .hero h1 { font-size: 36px; }
+    .types-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-row { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .stats-row { gap: 32px; flex-wrap: wrap; }
+    .form-row { grid-template-columns: 1fr; }
+}
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- NAVBAR                                     -->
+<!-- ═══════════════════════════════════════════ -->
+<nav class="navbar">
+    <a href="#" class="nav-brand">
+        <div class="nav-logo">Z</div>
+        <span class="nav-brand-text">Zava Lending</span>
+    </a>
+    <div class="nav-links">
+        <a href="#rates">Check Your Rate</a>
+        <a href="#loans">Loan Types</a>
+        <a href="#how">How It Works</a>
+        <a href="#reviews">Reviews</a>
+    </div>
+    <a href="#rates" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- HERO                                       -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="hero">
+    <div class="hero-badge"><span class="dot"></span> Rates as low as 5.49% APR</div>
+    <h1>Loans that move at <span class="highlight">the speed of you</span></h1>
+    <p class="hero-sub">
+        Get pre-qualified in minutes with no impact to your credit score.
+        Personal, auto, and business loans from $2,000 to $500,000.
+    </p>
+    <div class="hero-actions">
+        <a href="#rates" class="btn-primary">Check Your Rate</a>
+        <a href="#how" class="btn-secondary">Learn More</a>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TRUST STATS                                -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="stats-row">
+    <div class="stat">
+        <div class="stat-value">$2.47B</div>
+        <div class="stat-label">Loans Funded</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">127K+</div>
+        <div class="stat-label">Happy Borrowers</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">4.8 ★</div>
+        <div class="stat-label">Customer Rating</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">&lt; 24hr</div>
+        <div class="stat-label">Avg. Funding Time</div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- RATE CHECKER (maps to usp_LoanEligibility) -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="rate-section" id="rates">
+    <h2>See your rate in seconds</h2>
+    <p class="section-sub">No hard credit pull. No commitment. Just your personalized rate.</p>
+
+    <div class="rate-card">
+        <form class="rate-form" id="rateForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Loan Amount</label>
+                    <input type="text" id="loanAmount" placeholder="$25,000" value="$25,000">
+                </div>
+                <div class="form-group">
+                    <label>Loan Purpose</label>
+                    <select id="loanPurpose">
+                        <option>Auto Purchase</option>
+                        <option>Personal Expense</option>
+                        <option>Small Business</option>
+                        <option>Home Improvement</option>
+                        <option>Debt Consolidation</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Estimated Credit Score</label>
+                    <select id="creditScore">
+                        <option>750+  (Excellent)</option>
+                        <option>700–749  (Good)</option>
+                        <option>650–699  (Fair)</option>
+                        <option>600–649  (Below Average)</option>
+                        <option>Below 600</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Annual Income</label>
+                    <input type="text" id="annualIncome" placeholder="$85,000" value="$85,000">
+                </div>
+            </div>
+            <button type="submit" class="btn-primary" style="align-self:center; margin-top:8px;">
+                Check My Rate →
+            </button>
+        </form>
+
+        <div class="rate-result" id="rateResult">
+            <div class="rate-number" id="rateDisplay">5.49%</div>
+            <div class="rate-label">Your estimated APR</div>
+            <div class="rate-monthly" id="monthlyDisplay">Est. monthly payment: $478/mo for 60 months</div>
+            <a href="#" class="rate-cta">Apply Now — No Obligation</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- LOAN TYPES                                 -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="loan-types" id="loans">
+    <h2>Find the right loan for you</h2>
+    <p class="section-sub">Competitive rates across all our lending products</p>
+
+    <div class="types-grid">
+        <div class="type-card">
+            <div class="type-icon">🚗</div>
+            <h3>Auto Loans</h3>
+            <p>New or used vehicles. Get pre-approved before you shop and negotiate with confidence.</p>
+            <div class="type-rate">Starting at <strong>5.49%</strong> APR</div>
+        </div>
+        <div class="type-card">
+            <div class="type-icon">💰</div>
+            <h3>Personal Loans</h3>
+            <p>Debt consolidation, major purchases, or unexpected expenses. Fixed rates, no surprises.</p>
+            <div class="type-rate">Starting at <strong>6.99%</strong> APR</div>
+        </div>
+        <div class="type-card">
+            <div class="type-icon">🏢</div>
+            <h3>Small Business</h3>
+            <p>Working capital, equipment, or expansion. Loans from $10K to $500K with flexible terms.</p>
+            <div class="type-rate">Starting at <strong>7.49%</strong> APR</div>
+        </div>
+        <div class="type-card">
+            <div class="type-icon">🏠</div>
+            <h3>Home Improvement</h3>
+            <p>Kitchen remodels, new roofs, additions. Borrow up to $100K with no home equity required.</p>
+            <div class="type-rate">Starting at <strong>5.99%</strong> APR</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- HOW IT WORKS (maps to usp_LoanApplication) -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="how-section" id="how">
+    <h2>How it works</h2>
+    <div class="steps-row">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Check your rate</h3>
+            <p>Enter a few details to see your personalized rate. It takes about 2 minutes and won't affect your credit score.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Choose your offer</h3>
+            <p>Pick the loan amount, term, and monthly payment that works for your budget. No hidden fees, ever.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Get funded fast</h3>
+            <p>Complete your application online. Most borrowers receive funds within 24 hours of approval.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TESTIMONIALS                               -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="testimonials" id="reviews">
+    <h2>What our borrowers say</h2>
+    <div class="testimonial-grid">
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"I was pre-approved for my auto loan in literally 3 minutes. The rate beat my bank by over 1.5%. I'm telling you, other lenders are living in the past."</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">BS</div>
+                <div class="author-info">
+                    <div class="author-name">Bob Sacamano</div>
+                    <div class="author-detail">Auto Loan · $35,000</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Used Zava to consolidate my credit cards into one payment. My father Frank told me I was throwing money away — turns out he was right. Saved $340/month."</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">GC</div>
+                <div class="author-info">
+                    <div class="author-name">George Costanza</div>
+                    <div class="author-detail">Personal Loan · $25,000</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Got a business loan for Vandelay Industries approved in 48 hours. My bank said 3 weeks — Zava said 'done.' Import, export, it doesn't matter. Highly recommend."</p>
+            <div class="testimonial-author">
+                <div class="author-avatar">AV</div>
+                <div class="author-info">
+                    <div class="author-name">Art Vandelay</div>
+                    <div class="author-detail">Small Business · $150,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CTA BANNER                                 -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="cta-banner">
+    <h2>Ready to get started?</h2>
+    <p>Check your rate in minutes — no impact to your credit score.</p>
+    <a href="#rates" class="btn-white">Check My Rate →</a>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- FOOTER                                     -->
+<!-- ═══════════════════════════════════════════ -->
+<footer class="footer">
+    <span>© 2026 Zava Lending, Inc. All rights reserved.</span>
+    <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+        <a href="#">Careers</a>
+    </div>
+</footer>
+
+<script>
+/* ============================================================
+   Rate Checker Logic (simulates usp_LoanEligibility flow)
+   ============================================================ */
+document.getElementById('rateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const scoreText = document.getElementById('creditScore').value;
+    const amountStr = document.getElementById('loanAmount').value.replace(/[^0-9]/g, '');
+    const amount = parseInt(amountStr) || 25000;
+
+    // Simulate rate lookup based on credit score tier
+    let baseRate;
+    if (scoreText.includes('750'))       baseRate = 5.49;
+    else if (scoreText.includes('700'))  baseRate = 7.29;
+    else if (scoreText.includes('650'))  baseRate = 9.49;
+    else if (scoreText.includes('600'))  baseRate = 12.99;
+    else                                 baseRate = 15.99;
+
+    // Adjust by loan purpose
+    const purpose = document.getElementById('loanPurpose').value;
+    if (purpose.includes('Auto'))               baseRate -= 0.5;
+    else if (purpose.includes('Business'))      baseRate += 1.0;
+    else if (purpose.includes('Home'))          baseRate -= 0.25;
+
+    baseRate = Math.max(baseRate, 4.99);
+
+    // Monthly payment (60 months)
+    const monthlyRate = baseRate / 100 / 12;
+    const months = 60;
+    const monthly = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                    (Math.pow(1 + monthlyRate, months) - 1);
+
+    document.getElementById('rateDisplay').textContent = baseRate.toFixed(2) + '%';
+    document.getElementById('monthlyDisplay').textContent =
+        `Est. monthly payment: $${Math.round(monthly).toLocaleString()}/mo for ${months} months`;
+
+    document.getElementById('rateResult').classList.add('visible');
+});
+</script>
+
+</body>
+</html>

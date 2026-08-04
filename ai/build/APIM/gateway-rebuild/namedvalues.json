@@ -1,0 +1,13 @@
+[
+  {
+    "displayName": "aoai-key",
+    "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/namedValues/aoai-key",
+    "keyVault": null,
+    "name": "aoai-key",
+    "resourceGroup": "<your-resource-group>",
+    "secret": true,
+    "tags": null,
+    "type": "Microsoft.ApiManagement/service/namedValues",
+    "value": null
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "apiRevision": "1",
+    "apiRevisionDescription": null,
+    "apiType": null,
+    "apiVersion": null,
+    "apiVersionDescription": null,
+    "apiVersionSet": null,
+    "apiVersionSetId": null,
+    "authenticationSettings": {
+      "oAuth2": null,
+      "oAuth2AuthenticationSettings": [],
+      "openid": null,
+      "openidAuthenticationSettings": [],
+      "returnProtectedResourceMetadata": false
+    },
+    "contact": null,
+    "description": null,
+    "displayName": "Azure OpenAI - ZavaFin",
+    "id": "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>/providers/Microsoft.ApiManagement/service/zavafin-ai-gateway/apis/azure-openai-api",
+    "isCurrent": true,
+    "isOnline": null,
+    "license": null,
+    "name": "azure-openai-api",
+    "path": "openai",
+    "protocols": [
+      "https"
+    ],
+    "resourceGroup": "<your-resource-group>",
+    "serviceUrl": "https://<your-ai-account>.cognitiveservices.azure.com/openai",
+    "sourceApiId": null,
+    "subscriptionKeyParameterNames": {
+      "header": "Ocp-Apim-Subscription-Key",
+      "query": "subscription-key"
+    },
+    "subscriptionRequired": true,
+    "termsOfServiceUrl": null,
+    "type": "Microsoft.ApiManagement/service/apis"
+  }
+]

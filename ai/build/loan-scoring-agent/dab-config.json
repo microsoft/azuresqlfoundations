@@ -1,0 +1,259 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/latest/download/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('MSSQL_CONNECTION_STRING')"
+  },
+  "runtime": {
+    "rest": {
+      "enabled": false
+    },
+    "graphql": {
+      "enabled": false
+    },
+    "host": {
+      "mode": "Development",
+      "cors": {
+        "origins": ["*"],
+        "allow-credentials": false
+      }
+    },
+    "mcp": {
+      "enabled": true,
+      "path": "/mcp",
+      "dml-tools": {
+        "describe-entities": true,
+        "create-record": false,
+        "read-records": true,
+        "update-record": false,
+        "delete-record": false,
+        "execute-entity": true
+      }
+    }
+  },
+  "entities": {
+    "LoanApplications": {
+      "source": {
+        "object": "dbo.LoanApplications",
+        "type": "table"
+      },
+      "description": "Incoming loan applications in the real-time pipeline. Each application has a status (Pending, Scoring, Decided, Expired) and links to an applicant. Filter by Status eq 'Pending' to find applications awaiting scoring.",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "fields": {
+                "include": [
+                  "ApplicationId",
+                  "ApplicantId",
+                  "LoanType",
+                  "RequestedAmount",
+                  "TermMonths",
+                  "LoanPurpose",
+                  "Channel",
+                  "ApplicationDate",
+                  "Status"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "mcp": {
+        "dml-tools": true
+      },
+      "mappings": {},
+      "relationships": {},
+      "rest": {
+        "enabled": false
+      },
+      "graphql": {
+        "enabled": false
+      }
+    },
+    "Applicants": {
+      "source": {
+        "object": "dbo.Applicants",
+        "type": "table"
+      },
+      "description": "Loan applicants (customers and prospects). Contains financial profile including annual income, credit score, debt-to-income ratio, employment status, and region. Use ApplicantId to join with LoanApplications.",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "fields": {
+                "include": [
+                  "ApplicantId",
+                  "FirstName",
+                  "LastName",
+                  "AnnualIncome",
+                  "EmploymentStatus",
+                  "EmploymentYears",
+                  "CreditScore",
+                  "DebtToIncomeRatio",
+                  "Region",
+                  "IsExistingCustomer"
+                ],
+                "exclude": [
+                  "Email",
+                  "PhoneNumber",
+                  "DateOfBirth"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "mcp": {
+        "dml-tools": true
+      },
+      "mappings": {},
+      "relationships": {},
+      "rest": {
+        "enabled": false
+      },
+      "graphql": {
+        "enabled": false
+      }
+    },
+    "LoanDecisions": {
+      "source": {
+        "object": "dbo.LoanDecisions",
+        "type": "table"
+      },
+      "description": "AI-generated loan scoring decisions with explainable narratives. Each decision includes a risk score (0-100), risk category (Low/Medium/High/Critical), decision (Approved/ConditionallyApproved/Denied/ManualReview), AI-generated narrative, and tamper-detection audit hash. Links to LoanApplications via ApplicationId.",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "fields": {
+                "include": [
+                  "DecisionId",
+                  "ApplicationId",
+                  "RiskScore",
+                  "RiskCategory",
+                  "Decision",
+                  "ApprovedAmount",
+                  "ApprovedRate",
+                  "Narrative",
+                  "SimilarLoanCount",
+                  "SimilarApprovalRate",
+                  "SimilarDefaultRate",
+                  "ModelVersion",
+                  "ProcessingTimeMs",
+                  "DecidedAt",
+                  "DecidedBy"
+                ],
+                "exclude": [
+                  "SimilarLoanIds",
+                  "AuditHash"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "mcp": {
+        "dml-tools": true
+      },
+      "mappings": {},
+      "relationships": {},
+      "rest": {
+        "enabled": false
+      },
+      "graphql": {
+        "enabled": false
+      }
+    },
+    "LoanHistory": {
+      "source": {
+        "object": "dbo.LoanHistory",
+        "type": "table"
+      },
+      "description": "Historical loan applications with outcomes. Contains 12M+ records used for vector similarity search during AI scoring. Each record has loan type, amounts, credit metrics, outcome (Approved/Denied/Default/PaidInFull/Active), and default rate. Used by the scoring procedure to find semantically similar historical loans.",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read",
+              "fields": {
+                "include": [
+                  "LoanId",
+                  "LoanType",
+                  "RequestedAmount",
+                  "ApprovedAmount",
+                  "InterestRate",
+                  "TermMonths",
+                  "CreditScore",
+                  "DebtToIncomeRatio",
+                  "LoanPurpose",
+                  "LoanOutcome",
+                  "DefaultRate",
+                  "ApplicationDate"
+                ],
+                "exclude": [
+                  "ApplicantId",
+                  "ApplicantIncome",
+                  "EmploymentYears",
+                  "DecisionDate"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "mcp": {
+        "dml-tools": true
+      },
+      "mappings": {},
+      "relationships": {},
+      "rest": {
+        "enabled": false
+      },
+      "graphql": {
+        "enabled": false
+      }
+    },
+    "ScoreLoan": {
+      "source": {
+        "object": "dbo.usp_ScoreLoanApplication",
+        "type": "stored-procedure",
+        "parameters": {
+          "ApplicationId": 1,
+          "ModelVersion": "Phi-4"
+        }
+      },
+      "description": "Score a loan application using AI. IMPORTANT: You MUST always pass the ApplicationId parameter with the actual application ID number from the user's request. Do NOT omit ApplicationId or use the default. Example: {\"entity\": \"ScoreLoan\", \"parameters\": {\"ApplicationId\": 2}} to score application 2.",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ],
+      "mcp": {
+        "dml-tools": true
+      },
+      "rest": {
+        "enabled": false,
+        "methods": [
+          "POST"
+        ]
+      },
+      "graphql": {
+        "enabled": false,
+        "operation": "mutation"
+      }
+    }
+  }
+}

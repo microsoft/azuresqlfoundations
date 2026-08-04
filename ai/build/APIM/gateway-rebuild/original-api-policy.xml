@@ -1,0 +1,29 @@
+<policies>
+	<inbound>
+		<base />
+		<set-backend-service backend-id="phi4-backend" />
+		<authentication-managed-identity resource="https://cognitiveservices.azure.com" />
+		<azure-openai-token-limit tokens-per-minute="10000" counter-key="@(context.Subscription.Id)" estimate-prompt-tokens="true" />
+		<llm-content-safety backend-id="contentsafety-backend">
+			<categories>
+				<category name="Hate" threshold="2" />
+				<category name="Sexual" threshold="2" />
+				<category name="SelfHarm" threshold="2" />
+				<category name="Violence" threshold="2" />
+			</categories>
+		</llm-content-safety>
+		<azure-openai-emit-token-metric namespace="zavafin-ai-gateway">
+			<dimension name="Subscription" value="@(context.Subscription.Id)" />
+			<dimension name="API" value="@(context.Api.Name)" />
+		</azure-openai-emit-token-metric>
+	</inbound>
+	<backend>
+		<forward-request timeout="120" />
+	</backend>
+	<outbound>
+		<base />
+	</outbound>
+	<on-error>
+		<base />
+	</on-error>
+</policies>
