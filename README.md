@@ -11,7 +11,9 @@ intelligent with native vector search and AI scoring.
 > 📺 **This workshop is a companion to the Azure SQL Foundations video series:**
 > **<https://aka.ms/azuresqlfoundationseries>**. Watch the videos to see the story,
 > then use this repo to run the same three acts hands-on.
-> Developers can use the **[Azure SQL Database Foundations: Developer Guide](https://aka.ms/sqldbdevguide)**
+>
+> 📘 **Developer companion guide:** Use the
+> **[Azure SQL Database Foundations: Developer Guide](https://aka.ms/sqldbdevguide)**
 > alongside this repo and the video series for developer-focused guidance.
 
 > ▶ **Using GitHub Copilot?** Open Copilot Chat in **Agent mode** and say
