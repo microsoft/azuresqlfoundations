@@ -97,6 +97,7 @@ following in one database, behind one SQL surface:
 |--------|-----|-------|----------------|
 | [migrate/](migrate/) | **Act 1** | Migrate & Modernize | On-prem SQL Server 2019 → Hyperscale via DMS (offline), then modernize in place: compat 150→170 (intelligent query processing), rowstore→clustered columnstore, automatic index compaction. |
 | [migrate/scripts/02-migrate-dms/](migrate/scripts/02-migrate-dms/) | Act 1 (scripted) | Migrate & Modernize | An approve-each-step runbook that drives the same migration with the local `az datamigration` CLI, invoked by the [zava-act1-migrate](.github/skills/zava-act1-migrate/SKILL.md) VS Code skill. Recorded as a 5-video Copilot Agent series. |
+| [cloudborn/](cloudborn/) | Alternative setup | Start from Hyperscale | Build a fresh, full-scale `ZavaLendingDB` directly on Azure SQL Hyperscale, including the baseline schema, loan narratives, scale tables, generated data, and workload procedures needed by the Scale and AI demos. |
 | [scale/](scale/) | **Act 2** | The Destination | Scale the migrated database for launch — vCore changes as a minimal-downtime control-plane operation, serverless, and named read replicas for read-only scale-out. Ships as a self-contained, interactive **scale dashboard** you can play. |
 | [ai/](ai/) | **Act 3** | The Engine Knows | Native `VECTOR_DISTANCE` + DiskANN vector search over millions of loans, AI risk scoring via `sp_invoke_external_rest_endpoint`, hybrid search, and workload isolation across named replicas. |
 
@@ -138,6 +139,19 @@ lives here; the runnable scripts and the plain-language prompts it drives live i
 - **Phases:** 0 Setup → 1 Assess → 2 Provision Hyperscale → 3 DMS + SHIR →
   4 Migrate (schema, then data) → 5 Validate → 99 Teardown.
 - Migration to Azure SQL Database (including Hyperscale) via DMS is **offline only**.
+
+### `cloudborn/` — Start fresh on Hyperscale
+
+Use this alternative bootstrap path when you are **not** running Act 1 and need to build the
+full `ZavaLendingDB` directly on Azure SQL Hyperscale. Its numbered SQL and PowerShell scripts
+create the base schema, configure named-replica queries, add loan narratives and full-text
+search, create the columnstore scale schema, generate the full dataset, and load the data and
+workload procedures. Once complete, continue with the Scale and AI demos; the remaining AI
+objects are deployed from [ai/build/](ai/build/).
+
+- **Build instructions and script order:** [cloudborn/README.md](cloudborn/README.md)
+- **Important:** this path drops, truncates, and regenerates core tables. Do **not** run it
+  against a database created by the Act 1 migration, because it will replace migrated data.
 
 ### `scale/` — Act 2: The Destination
 Picks up the *same* migrated `ZavaLendingDB` and shows how you scale it for launch on
@@ -310,6 +324,7 @@ azuresqlfoundations/
 │       ├── 01-source-sql2019/        #   stand up + seed the SQL 2019 source
 │       ├── 02-migrate-dms/           #   the complete az datamigration CLI migration
 │       └── 03-optimize/              #   optional post-migrate modernization
+├── cloudborn/                        # Alternative — build the full Scale/AI database on Hyperscale
 ├── scale/                            # Act 2 — Scale on Hyperscale (interactive scale dashboard + apps)
 └── ai/                               # Act 3 — Vector search + AI scoring (scripts, agent, MCP)
 ```
