@@ -1,5 +1,7 @@
 # Scale Dashboard — how to use it
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 `dashboard.html` is a **self-contained, offline** web page that lets you "play" the Zava
 Lending scaling story. Everything (styles, charts, and the captured phase data) is inlined —
 there's no server, no database, and no build step.

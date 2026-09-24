@@ -1,5 +1,7 @@
 # Loan Scoring Agent — Walkthrough (optional exercise)
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 > **Optional.** This exercise is **not required** to complete Act 3. Narrative Search and AI
 > Loan Scoring both run end-to-end in T-SQL without it. This folder shows how to *use* the
 > loan-scoring agent once it's deployed.

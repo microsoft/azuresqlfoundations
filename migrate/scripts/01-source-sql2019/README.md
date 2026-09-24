@@ -1,5 +1,7 @@
 # Step 1 — Stand up the SQL Server 2019 source
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 Detailed steps for the migrate source. The "on-prem SQL Server 2019" is simulated by an
 **Azure VM** — purely to avoid standing up a physical box. It migrates to Hyperscale over
 the **public endpoint**, exactly as a real datacenter server would.

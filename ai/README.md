@@ -1,5 +1,7 @@
 # Act 3 — Add AI: Vector Search + In-Database Loan Scoring
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 ZavaFin already migrated their lending database (`ZavaLendingDB`) from on-prem SQL Server
 2019 to **Azure SQL Hyperscale** in **Act 1 (Migrate)** — and optionally scaled it for launch
 in **Act 2 (Scale)**. The platform is running. Now they want to make it **intelligent** —

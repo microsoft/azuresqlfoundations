@@ -1,5 +1,7 @@
 # Step 3 — Modernize on Hyperscale (optional)
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 Detailed steps for the post-migration modernization. Run each script on the **Hyperscale
 target** after the migration (Step 2) completes. These are independent — run all three or
 just the ones you want.

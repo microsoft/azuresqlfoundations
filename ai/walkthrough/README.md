@@ -1,5 +1,7 @@
 # Act 3 walkthrough — run Narrative Search + AI Loan Scoring
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 Execute the T-SQL behind the two AI capabilities, then see the same scoring engine driven by
 a Microsoft Foundry agent through DAB/MCP.
 

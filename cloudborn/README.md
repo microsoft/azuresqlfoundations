@@ -1,5 +1,7 @@
 # cloudborn — "Start from Hyperscale" build scripts
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 > ⚠️ **Use these scripts ONLY when starting cloud-born** — i.e. you are building
 > ZavaLendingDB **fresh on Azure SQL Hyperscale** from scratch.
 >

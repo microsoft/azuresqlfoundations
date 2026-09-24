@@ -201,20 +201,12 @@ BEGIN
     -- 4. Build context for Phi-4
     -- =========================================
     
-    DECLARE @similarLoansSummary NVARCHAR(MAX) = '';
-    
-    SELECT @similarLoansSummary = @similarLoansSummary + 
-        'Loan ' + CAST(LoanId AS NVARCHAR(20)) + ': ' +
-        '$' + FORMAT(RequestedAmount, 'N0') + ', ' +
-        'Income $' + FORMAT(ApplicantIncome, 'N0') + ', ' +
-        'Credit ' + CAST(CreditScore AS NVARCHAR(10)) + ', ' +
-        'DTI ' + CAST(DebtToIncomeRatio AS NVARCHAR(10)) + ', ' +
-        'Purpose: ' + ISNULL(LoanPurpose, 'N/A') + ', ' +
-        'Outcome: ' + LoanOutcome + 
-        CASE WHEN DefaultRate IS NOT NULL THEN ', Default Risk: ' + CAST(DefaultRate AS NVARCHAR(10)) ELSE '' END +
-        CHAR(10)
-    FROM @similarLoans
-    ORDER BY SemanticDistance;
+    -- Keep individual historical applications out of the LLM prompt. The vector search
+    -- still selects the comparison cohort; only aggregate outcomes are sent to the model.
+    DECLARE @similarLoansSummary NVARCHAR(MAX) =
+        N'Aggregate outcomes for ' + CAST(@similarCount AS NVARCHAR(10)) +
+        N' semantically similar loans: approval rate ' + CAST(@approvalRate AS NVARCHAR(10)) +
+        N'%, average default rate ' + CAST(ISNULL(@avgDefaultRate, 0) AS NVARCHAR(10)) + N'.';
     
     DECLARE @prompt NVARCHAR(MAX) = N'You are a loan underwriting AI assistant for ZavaFin. 
 Analyze this loan application against similar historical loans and provide a risk assessment.
