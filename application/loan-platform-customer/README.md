@@ -1,12 +1,13 @@
 # Zava Lending — Customer Site
 
-A self-contained static web page ([index.html](index.html)) that stands in for Zava Lending's
-**borrower-facing** website — the public application experience the platform database powers.
+A borrower-facing application for Zava Lending. Its rate checker calls the shared Node API,
+which estimates a rate from comparable loans in `ZavaLendingDB`.
 
-## How to open
+## Run
 
-Open [index.html](index.html) directly in any browser — no server, no build, no data
-connection. All content is mocked in the page; it illustrates the UX, not live data.
+From the parent `application` directory, set `APP_KIND=customer` in `.env`, run `npm start`,
+and open `http://localhost:3000`. See the parent README for Azure App Service deployment and
+managed identity configuration.
 
 ## What it shows
 

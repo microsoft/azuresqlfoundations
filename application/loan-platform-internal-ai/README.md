@@ -1,21 +1,20 @@
 # Zava Lending — Internal Operations Console
 
-A self-contained static web page ([index.html](index.html)) that stands in for Zava Lending's
-internal staff app. It's the visual anchor for **Act 3 (AI)**: open it and click the two
-**AI Intelligence** menu items to see the capabilities the AI act adds to a dashboard the
-company already runs on Hyperscale.
+The live internal staff application for **Act 3 (AI)**. Its **AI Intelligence** screens call
+the hybrid search and loan scoring procedures in `ZavaLendingDB`.
 
-## How to open
+## Run
 
-Open [index.html](index.html) directly in any browser — no server, no build, no data
-connection. All content is mocked in the page; it illustrates the UX, not live data.
+From the parent `application` directory, set `APP_KIND=internal-ai` in `.env`, run `npm start`,
+and open `http://localhost:3000`. See the parent README for Azure App Service deployment,
+managed identity permissions, and required Act 3 database objects.
 
 ## The menu
 
 The dark left sidebar groups the console into sections:
 
 | Section | Items |
-|---------|-------|
+| --- | --- |
 | **Overview** | Dashboard |
 | **Operations** | Account Review, Risk Exposure, Branch Activity, Payment Processing |
 | **🟣 AI Intelligence** | **🔍 Narrative Search**, **🤖 AI Loan Scoring** |

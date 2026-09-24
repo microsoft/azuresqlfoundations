@@ -1,47 +1,70 @@
-# Zava Lending — Application Front-Ends (UI mockups)
+# Zava Lending applications
 
-Static, self-contained web pages that stand in for Zava Lending's apps. They are the
-**visual anchor** for the workshop — open them to *see* what the `ZavaLendingDB` database
-powers at each act.
+The three original mockups are now live Node.js applications backed by `ZavaLendingDB`:
 
-> ⚠️ **These are mockups, not the real application.** Every page is a single `index.html`
-> with **all data hard-coded in the page**. There is **no server, no build step, and no
-> connection to any database or Azure resource** — nothing you do in these pages runs a
-> query or calls an API. They illustrate the **UX**, not live data. The actual data and AI
-> work happens in the SQL scripts under [migrate/](../migrate/), [scale/](../scale/), and
-> [ai/](../ai/).
+| App | `APP_KIND` | Live behavior |
+| --- | --- | --- |
+| `loan-platform-customer` | `customer` | Rate estimate from comparable historical loans |
+| `loan-platform-internal` | `internal` | Portfolio dashboard, account lookup, risk, branch, and payment data |
+| `loan-platform-internal-ai` | `internal-ai` | Internal app plus hybrid narrative search and AI loan scoring |
 
-## How to open
+One deployable artifact serves all three applications. Each Azure App Service sets a different
+`APP_KIND` and has its own system-assigned managed identity. The browser never receives a SQL
+credential or access token.
 
-Double-click any `index.html` (or open it in a browser). That's it — no install, no server.
+## Configuration
 
-## The three front-ends — and when to look at them
+Copy `.env.example` to `.env` and fill in the values. `AZURE_SQL_SERVER` is the logical server
+name only, without `.database.windows.net`.
 
-You **first review the customer and internal apps in Act 1**, right after the database is
-migrated — an exercise to see the app the new Hyperscale database powers. They reappear in
-**Act 2** (same console, now on the scaled database), and **Act 3** adds the AI version.
+```powershell
+Copy-Item .env.example .env
+```
 
-| App | Open it during | What it shows |
-|-----|----------------|---------------|
-| [loan-platform-customer/](loan-platform-customer/) | **Act 1** (review after migrating) · also in Act 2 | The **borrower-facing** website — the public "Check Your Rate" application experience. |
-| [loan-platform-internal/](loan-platform-internal/) | **Act 1** (review after migrating) · also in Act 2 | The **internal staff** operations console the migrated database powers. |
-| [loan-platform-internal-ai/](loan-platform-internal-ai/) | **Act 3 — AI** | The same console **plus an 🟣 AI Intelligence menu** (🔍 Narrative Search + 🤖 AI Loan Scoring) — the visual anchor for the AI act. |
+For local development, `DefaultAzureCredential` uses your Azure CLI identity:
 
-All three represent the same fictional platform on the same `ZavaLendingDB`. Each subfolder
-has its own README with the detail:
+```powershell
+az login
+npm install
+npm test
+npm start
+```
 
-- **Customer site:** [loan-platform-customer/README.md](loan-platform-customer/README.md)
-- **Internal console (Act 2):** [loan-platform-internal/README.md](loan-platform-internal/README.md)
-- **Internal console + AI (Act 3):** [loan-platform-internal-ai/README.md](loan-platform-internal-ai/README.md)
+Set `APP_KIND` in `.env` to `customer`, `internal`, or `internal-ai`, then open
+`http://localhost:3000`. Your signed-in identity must exist as a contained database user with
+the required permissions.
 
-## Where these fit
+## Deploy to three App Services
 
-The **🔍 Narrative Search** and **🤖 AI Loan Scoring** screens in the AI console are the UX
-over the real T-SQL objects built in Act 3 —
-[ai/build/sql/03-hybrid-search-procedure.sql](../ai/build/sql/03-hybrid-search-procedure.sql)
-(`usp_HybridLoanSearch`) and
-[ai/build/sql/04-loan-scoring.sql](../ai/build/sql/04-loan-scoring.sql)
-(`usp_ScoreLoanApplication`). The mockups show what those procedures *feel like* to an
-underwriter; run the scripts to see them actually execute.
+Prerequisites:
 
-See the parent [../README.md](../README.md) for the full three-act story.
+- Azure CLI authenticated with `az login`
+- Permission to create App Service and Storage resources and assign roles in the target resource group
+- Azure SQL Microsoft Entra administrator access for the database permission step
+- `sqlcmd` for configuring contained database users
+
+After completing `.env`, provision and deploy all three apps:
+
+```powershell
+./deploy-apps.ps1
+```
+
+Then grant their managed identities access to the database:
+
+```powershell
+./configure-database-access.ps1
+```
+
+The infrastructure template is in `infra/main.bicep`. It creates one Linux App Service plan,
+three HTTPS-only Node 20 App Services with health checks at `/api/health`, and a private
+Standard LRS storage account for the application package. Shared-key access is disabled. Each
+app reads the package with its managed identity and the `Storage Blob Data Reader` role.
+
+## Database requirements
+
+The operational applications expect the base and scale schemas from `cloudborn/`. The AI
+application additionally requires the objects created by `ai/build/sql/`, including
+`dbo.usp_HybridLoanSearch` and `dbo.usp_ScoreLoanApplication`.
+
+The customer and internal identities receive `db_datareader`. The AI identity receives
+`db_datareader` plus execute permission only on the two AI stored procedures.
