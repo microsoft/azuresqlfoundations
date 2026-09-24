@@ -1,5 +1,7 @@
 # `ai/build/` — Deploy the AI capabilities
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 These scripts add **Narrative Search** (semantic vector search) and **AI Loan Scoring** to
 an existing `ZavaLendingDB`. Run them in order against the primary database. They are
 additive and non-destructive — they add columns, tables, an index, and stored procedures

@@ -1,5 +1,7 @@
 # DMS CLI Migration Scripts — SQL Server → Azure SQL Database Hyperscale
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 > For a guided, approve-each-step walkthrough (setup → assess → provision →
 > DMS+SHIR → migrate → validate), see the Act 1 skill
 > [SKILL.md](../../../.github/skills/zava-act1-migrate/SKILL.md). Ready-to-paste

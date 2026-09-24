@@ -1,5 +1,7 @@
 # Act 1 — Migrate & Modernize: SQL Server 2019 → Azure SQL Hyperscale
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 Migrate the fictional **ZavaFin** lending database (`ZavaLendingDB`) from an on-prem **SQL
 Server 2019** instance to **Azure SQL Database Hyperscale**, then modernize it in place.
 This is the companion to the Act 1 video — watch along or work straight through at your own

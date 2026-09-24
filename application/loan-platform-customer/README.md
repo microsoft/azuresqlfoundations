@@ -1,5 +1,7 @@
 # Zava Lending — Customer Site
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 A borrower-facing application for Zava Lending. Its rate checker calls the shared Node API,
 which estimates a rate from comparable loans in `ZavaLendingDB`.
 

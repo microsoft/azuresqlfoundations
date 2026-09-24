@@ -1,5 +1,7 @@
 # Zava Lending — Internal Operations Console (Acts 1–2)
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 The internal staff operations console backed by live data from `ZavaLendingDB`.
 
 ## Run

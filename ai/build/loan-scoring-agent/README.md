@@ -1,5 +1,7 @@
 # Loan Scoring Agent — SQL MCP Server + Azure AI Foundry
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 > **Parent Demo:** Act 3 — "The Engine Knows: Vector Search + AI Scoring"  
 > **Purpose:** Expose ZavaFin's loan scoring stored procedure as an MCP tool via SQL MCP Server (Data API Builder), deploy it to Azure Container Apps, and connect it to a Microsoft Foundry Agent that automates the entire loan decisioning workflow.
 

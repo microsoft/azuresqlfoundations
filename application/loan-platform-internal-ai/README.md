@@ -1,5 +1,7 @@
 # Zava Lending — Internal Operations Console
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 The live internal staff application for **Act 3 (AI)**. Its **AI Intelligence** screens call
 the hybrid search and loan scoring procedures in `ZavaLendingDB`.
 

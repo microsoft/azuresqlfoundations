@@ -1,5 +1,7 @@
 # Act 2 — Scale on Hyperscale
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 ## Scaling on Hyperscale — the concepts
 
 Once ZavaFin's lending database lands on Azure SQL Hyperscale, "scaling for launch" stops

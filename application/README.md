@@ -1,5 +1,7 @@
 # Zava Lending applications
 
+> 📺 Part of the [Azure SQL Foundations video series & workshop](../README.md) — companion to <https://aka.ms/azuresqlfoundationseries>.
+
 The three original mockups are now live Node.js applications backed by `ZavaLendingDB`:
 
 | App | `APP_KIND` | Live behavior |
@@ -60,11 +62,30 @@ three HTTPS-only Node 20 App Services with health checks at `/api/health`, and a
 Standard LRS storage account for the application package. Shared-key access is disabled. Each
 app reads the package with its managed identity and the `Storage Blob Data Reader` role.
 
-## Database requirements
+## Deploy the database
 
-The operational applications expect the base and scale schemas from `cloudborn/`. The AI
-application additionally requires the objects created by `ai/build/sql/`, including
-`dbo.usp_HybridLoanSearch` and `dbo.usp_ScoreLoanApplication`.
+These apps run against `ZavaLendingDB`. The database is a **prerequisite** — deploy it
+**before** running `deploy-apps.ps1`. This is separate from the App Service deployment above,
+and there are two ways to get the database depending on whether you did the Act 1 migration:
 
-The customer and internal identities receive `db_datareader`. The AI identity receives
-`db_datareader` plus execute permission only on the two AI stored procedures.
+- **You already ran Act 1 (Migrate).** `ZavaLendingDB` already exists on Hyperscale with its
+  data — nothing else to build for the operational apps. **Do not** run the `cloudborn/`
+  scripts; they DROP/TRUNCATE and would wipe the migrated data. For the AI app, additionally
+  run the objects in [`../ai/build/sql/`](../ai/build/sql/).
+- **Starting cloud-born (no migration).** Build the database fresh on Hyperscale from
+  [`../cloudborn/`](../cloudborn/) (base + scale schema and data). See
+  [../cloudborn/README.md](../cloudborn/README.md). For the AI app, then run
+  [`../ai/build/sql/`](../ai/build/sql/).
+
+Schema each app expects:
+
+| App | Requires |
+| --- | --- |
+| `loan-platform-customer` | Base + scale schemas |
+| `loan-platform-internal` | Base + scale schemas |
+| `loan-platform-internal-ai` | The above **plus** `ai/build/sql/` objects, including `dbo.usp_HybridLoanSearch` and `dbo.usp_ScoreLoanApplication` |
+
+After the database exists and the apps are deployed, run `configure-database-access.ps1` to
+create the contained database users. The customer and internal identities receive
+`db_datareader`. The AI identity receives `db_datareader` plus execute permission only on the
+two AI stored procedures.
