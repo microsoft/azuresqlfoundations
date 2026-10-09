@@ -51,8 +51,8 @@ best of both worlds. The script shows:
 **Script:** [03-auto-index-compaction.sql](03-auto-index-compaction.sql)
 
 Enable automatic index compaction. The OLTP write workload bloats B-tree leaf pages over
-time; on-prem you'd run weekend rebuild jobs. On Hyperscale the platform compacts pages
-continuously, with low overhead and no maintenance jobs.
+time; on-prem you'd run weekend rebuild jobs. On Hyperscale the platform can compact pages
+with low overhead and no maintenance jobs.
 
 ```sql
 ALTER DATABASE ZavaLendingDB SET AUTOMATIC_INDEX_COMPACTION = ON;
@@ -61,6 +61,11 @@ ALTER DATABASE ZavaLendingDB SET AUTOMATIC_INDEX_COMPACTION = ON;
 The script captures a page-density baseline via `sys.dm_db_index_physical_stats` and points
 to the `auto_index_compaction_stats` Extended Event for ongoing visibility.
 
+> **Demo timing.** This demo relies on automatic index compaction being enabled immediately
+> after the changes that create page-density opportunities. Do not rely on compaction
+> occurring immediately in production: compaction is performed during version cleanup, so
+> it takes place only when versions need to be cleaned up.
+>
 > **Preview + scope.** Automatic index compaction is in preview and acts on **B-tree leaf
 > pages only** (not heaps, not compressed columnstore rowgroups) — so it complements, and
 > does not overlap, the columnstore conversion in 3b.
