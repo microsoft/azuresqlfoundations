@@ -24,6 +24,11 @@ intelligent with native vector search and AI scoring.
 
 ## Why Hyperscale?
 
+Explore [Inside Azure SQL Hyperscale - Level 200](architecture/level200/README.md)
+as an interactive HTML tour, 4K MP4, GIF, editable PowerPoint, or full-screen
+PowerPoint Show. These conceptual animations play offline and do not require
+deploying the workshop.
+
 Azure SQL Database Hyperscale is a cost-efficient, high-performance cloud database and is suitable for all workload types.
 
 Azure SQL Database is based on the [SQL Database Engine](https://learn.microsoft.com/en-us/sql/database-engine/sql-database-engine). Users can start small and grow to their needs with Hyperscale:

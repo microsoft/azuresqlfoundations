@@ -1,0 +1,322 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="Segoe UI, Arial, sans-serif">
+  <!-- ============================================================= -->
+  <!-- Figure 3-1. Azure SQL Hyperscale architecture (master figure) -->
+  <!-- Data plane (read/write path) over a control-plane foundation. -->
+  <!-- White background; white-filled shapes; one outline color/tier. -->
+  <!-- ============================================================= -->
+  <defs>
+    <marker id="mUser" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#333333"/>
+    </marker>
+    <marker id="mUserUp" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="270" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#333333"/>
+    </marker>
+    <marker id="mLog" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#C0198C"/>
+    </marker>
+    <marker id="mLogUp" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="270" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#C0198C"/>
+    </marker>
+    <marker id="mLogDown" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="90" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#C0198C"/>
+    </marker>
+    <marker id="mData" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#0072C6"/>
+    </marker>
+    <marker id="mDataUp" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="270" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#0072C6"/>
+    </marker>
+    <marker id="mDataLeft" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="180" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#0072C6"/>
+    </marker>
+    <marker id="mDataRight" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="0" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#0072C6"/>
+    </marker>
+    <marker id="mDataDown" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="90" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#0072C6"/>
+    </marker>
+    <marker id="mUserLeft" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="180" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#333333"/>
+    </marker>
+    <marker id="mLogLeft" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="180" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#C0198C"/>
+    </marker>
+    <marker id="mCtlDown" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="90" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#B15C00"/>
+    </marker>
+    <marker id="mCtlUp" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="270" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#B15C00"/>
+    </marker>
+    <marker id="mCtlLeft" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="180" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#B15C00"/>
+    </marker>
+    <marker id="mCtlRight" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="0" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#B15C00"/>
+    </marker>
+  </defs>
+
+  <!-- white canvas -->
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+
+  <!-- ===== plane highlights ===== -->
+  <!-- data plane region -->
+  <rect x="30" y="38" width="1220" height="556" rx="10" fill="#F5F9FF" stroke="#CFE3F7" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <text x="24" y="316" transform="rotate(-90 24 316)" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="3" fill="#0072C6">DATA PLANE &#8212; read / write path</text>
+
+  <!-- title -->
+  <text x="640" y="26" text-anchor="middle" font-size="20" font-weight="700" fill="#1F2937">Azure SQL Hyperscale architecture</text>
+
+  <!-- ============================ APPS ============================ -->
+  <!-- Read-write application -->
+  <rect x="110" y="42" width="130" height="50" rx="7" fill="#FFFFFF" stroke="#444444" stroke-width="2"/>
+  <text x="175" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#333333">Read-write app</text>
+  <text x="175" y="79" text-anchor="middle" font-size="10" fill="#666666">application</text>
+  <!-- Read-only app to HA replica (optional) -->
+  <rect x="335" y="42" width="130" height="50" rx="7" fill="#FFFFFF" stroke="#444444" stroke-width="2"/>
+  <text x="400" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#333333">Read-only app</text>
+  <text x="400" y="79" text-anchor="middle" font-size="10" fill="#666666">(optional)</text>
+  <!-- Read-only app to named replica (optional) -->
+  <rect x="590" y="42" width="130" height="50" rx="7" fill="#FFFFFF" stroke="#444444" stroke-width="2"/>
+  <text x="655" y="63" text-anchor="middle" font-size="12" font-weight="700" fill="#333333">Read-only app</text>
+  <text x="655" y="79" text-anchor="middle" font-size="10" fill="#666666">(optional)</text>
+
+  <!-- ===================== COMPUTE CLUSTERS ====================== -->
+  <!-- left cluster: primary + HA -->
+  <rect x="70" y="112" width="430" height="156" rx="9" fill="none" stroke="#9AA5B1" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="82" y="128" font-size="11" font-weight="700" fill="#6B7280">Compute</text>
+  <!-- right cluster: named replicas -->
+  <rect x="560" y="112" width="670" height="156" rx="9" fill="none" stroke="#9AA5B1" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="572" y="128" font-size="11" font-weight="700" fill="#6B7280">Compute</text>
+
+  <!-- Primary replica -->
+  <rect x="95" y="150" width="160" height="108" rx="7" fill="#FFFFFF" stroke="#0072C6" stroke-width="2"/>
+  <rect x="100" y="155" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="110" y="163.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="175" y="173" text-anchor="middle" font-size="13" font-weight="700" fill="#0072C6">Primary replica</text>
+  <text x="175" y="189" text-anchor="middle" font-size="9" fill="#555555">buffer pool &#183; workers</text>
+  <text x="175" y="201" text-anchor="middle" font-size="9" fill="#555555">tempdb &#183; read / write</text>
+  <text x="175" y="213" text-anchor="middle" font-size="9" fill="#555555">provisioned / serverless</text>
+  <rect x="108" y="228" width="134" height="20" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="175" y="242" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; sparse</text>
+
+  <!-- HA secondary replica (stacked, 0-4) -->
+  <rect x="326" y="144" width="160" height="108" rx="7" fill="#FFFFFF" stroke="#107C10" stroke-width="1.6"/>
+  <rect x="323" y="147" width="160" height="108" rx="7" fill="#FFFFFF" stroke="#107C10" stroke-width="1.6"/>
+  <rect x="320" y="150" width="160" height="108" rx="7" fill="#FFFFFF" stroke="#107C10" stroke-width="2"/>
+  <rect x="325" y="155" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="335" y="163.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="398" y="173" text-anchor="middle" font-size="12" font-weight="700" fill="#107C10">HA Replica</text>
+  <text x="398" y="189" text-anchor="middle" font-size="9" fill="#555555">buffer pool</text>
+  <text x="398" y="201" text-anchor="middle" font-size="9" fill="#555555">0&#8211;4 &#183; redo log</text>
+  <text x="398" y="213" text-anchor="middle" font-size="9" fill="#555555">Intent = Read Only</text>
+  <rect x="333" y="228" width="134" height="20" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="400" y="242" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; sparse</text>
+
+  <!-- Named replica 1 (stacked = each named replica can have 0-4 HA replicas) -->
+  <rect x="596" y="144" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="1.6"/>
+  <rect x="593" y="147" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="1.6"/>
+  <rect x="590" y="150" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+  <rect x="592" y="155" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="602" y="163.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="655" y="173" text-anchor="middle" font-size="10" font-weight="700" fill="#5C2D91">Named replica 1</text>
+  <text x="655" y="186" text-anchor="middle" font-size="8" fill="#555555">buffer pool</text>
+  <text x="655" y="198" text-anchor="middle" font-size="8" fill="#555555">read-only</text>
+  <text x="655" y="209" text-anchor="middle" font-size="8" fill="#555555">different DB name</text>
+  <text x="655" y="220" text-anchor="middle" font-size="7.5" fill="#555555">diff vCores / Serverless</text>
+  <rect x="600" y="228" width="110" height="20" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="655" y="242" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; sparse</text>
+  <!-- Named replica 2 (stacked = each named replica can have 0-4 HA replicas) -->
+  <rect x="746" y="144" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="1.6"/>
+  <rect x="743" y="147" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="1.6"/>
+  <rect x="740" y="150" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+  <rect x="742" y="155" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="752" y="163.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="805" y="173" text-anchor="middle" font-size="10" font-weight="700" fill="#5C2D91">Named replica 2</text>
+  <text x="805" y="186" text-anchor="middle" font-size="8" fill="#555555">buffer pool</text>
+  <text x="805" y="198" text-anchor="middle" font-size="8" fill="#555555">read-only</text>
+  <text x="805" y="209" text-anchor="middle" font-size="8" fill="#555555">different DB name</text>
+  <text x="805" y="220" text-anchor="middle" font-size="7.5" fill="#555555">diff vCores / Serverless</text>
+  <rect x="750" y="228" width="110" height="20" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="805" y="242" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; sparse</text>
+  <!-- ellipsis + count -->
+  <text x="960" y="200" text-anchor="middle" font-size="18" font-weight="700" fill="#5C2D91">&#183; &#183; &#183;</text>
+  <text x="960" y="176" text-anchor="middle" font-size="9.5" fill="#6B7280">up to 30</text>
+  <text x="960" y="218" text-anchor="middle" font-size="8.5" fill="#5C2D91">each: 0&#8211;4 HA replicas</text>
+  <!-- Named replica 30 (stacked) -->
+  <rect x="1076" y="144" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="1.6"/>
+  <rect x="1073" y="147" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="1.6"/>
+  <rect x="1070" y="150" width="130" height="108" rx="7" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+  <rect x="1072" y="155" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="1082" y="163.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="1135" y="173" text-anchor="middle" font-size="10" font-weight="700" fill="#5C2D91">Named replica 30</text>
+  <text x="1135" y="186" text-anchor="middle" font-size="8" fill="#555555">buffer pool</text>
+  <text x="1135" y="198" text-anchor="middle" font-size="8" fill="#555555">read-only</text>
+  <text x="1135" y="209" text-anchor="middle" font-size="8" fill="#555555">different DB name</text>
+  <text x="1135" y="220" text-anchor="middle" font-size="7.5" fill="#555555">diff vCores / Serverless</text>
+  <rect x="1080" y="228" width="110" height="20" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="1135" y="242" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; sparse</text>
+
+  <!-- ======================= LOG SERVICE ======================== -->
+  <rect x="250" y="292" width="580" height="44" rx="8" fill="#FFFFFF" stroke="#D83B01" stroke-width="2"/>
+  <text x="540" y="311" text-anchor="middle" font-size="13" font-weight="700" fill="#D83B01">Log service (XLOG)</text>
+  <text x="540" y="327" text-anchor="middle" font-size="9.5" fill="#555555">landing zone &#183; log cache &#183; destage</text>
+
+  <!-- ======================= PAGE SERVERS ======================= -->
+  <rect x="250" y="356" width="580" height="108" rx="9" fill="none" stroke="#008575" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="262" y="372" font-size="11" font-weight="700" fill="#0E6E63">Page servers</text>
+  <!-- page server + redundant replica (the stack) over data file 1 -->
+  <rect x="280" y="383" width="130" height="64" rx="7" fill="#FFFFFF" stroke="#008575" stroke-width="1.6"/>
+  <rect x="275" y="388" width="130" height="64" rx="7" fill="#FFFFFF" stroke="#008575" stroke-width="2"/>
+  <rect x="280" y="392" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="290" y="400.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="340" y="404" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0E6E63">Page server</text>
+  <text x="340" y="416" text-anchor="middle" font-size="8" fill="#555555">buffer pool</text>
+  <text x="340" y="426" text-anchor="middle" font-size="8" fill="#555555">&#8804; 128 GB data file</text>
+  <rect x="285" y="430" width="110" height="18" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="340" y="443" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; Dynamic</text>
+  <!-- page server + redundant replica over data file 2 -->
+  <rect x="425" y="383" width="130" height="64" rx="7" fill="#FFFFFF" stroke="#008575" stroke-width="1.6"/>
+  <rect x="420" y="388" width="130" height="64" rx="7" fill="#FFFFFF" stroke="#008575" stroke-width="2"/>
+  <rect x="425" y="392" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="435" y="400.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="485" y="404" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0E6E63">Page server</text>
+  <text x="485" y="416" text-anchor="middle" font-size="8" fill="#555555">buffer pool</text>
+  <text x="485" y="426" text-anchor="middle" font-size="8" fill="#555555">&#8804; 128 GB data file</text>
+  <rect x="430" y="430" width="110" height="18" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="485" y="443" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; Dynamic</text>
+  <!-- ellipsis -->
+  <text x="612" y="426" text-anchor="middle" font-size="18" font-weight="700" fill="#008575">&#183; &#183; &#183;</text>
+  <!-- page server + redundant replica over data file N -->
+  <rect x="695" y="383" width="130" height="64" rx="7" fill="#FFFFFF" stroke="#008575" stroke-width="1.6"/>
+  <rect x="690" y="388" width="130" height="64" rx="7" fill="#FFFFFF" stroke="#008575" stroke-width="2"/>
+  <rect x="695" y="392" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="705" y="400.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="755" y="404" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0E6E63">Page server</text>
+  <text x="755" y="416" text-anchor="middle" font-size="8" fill="#555555">buffer pool</text>
+  <text x="755" y="426" text-anchor="middle" font-size="8" fill="#555555">&#8804; 128 GB data file</text>
+  <rect x="700" y="430" width="110" height="18" rx="4" fill="#FFFFFF" stroke="#008575" stroke-width="1.2"/>
+  <text x="755" y="443" text-anchor="middle" font-size="9" font-weight="600" fill="#008575">RBPEX &#183; Dynamic</text>
+
+  <!-- ======================= AZURE STORAGE ====================== -->
+  <rect x="250" y="482" width="770" height="104" rx="9" fill="none" stroke="#5F6B7A" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="262" y="500" font-size="11" font-weight="700" fill="#4B5563">Azure Storage</text>
+  <text x="366" y="500" font-size="11" font-weight="700" fill="#4B5563">durable tier</text>
+  <!-- cylinders (data files) -->
+  <!-- cyl 1 @340 -->
+  <path d="M295,518 V554 A45,8 0 0 0 385,554 V518" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <ellipse cx="340" cy="518" rx="45" ry="8" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <text x="340" y="540" text-anchor="middle" font-size="9.5" font-weight="600" fill="#4B5563">Data file</text>
+  <!-- cyl 2 @485 -->
+  <path d="M440,518 V554 A45,8 0 0 0 530,554 V518" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <ellipse cx="485" cy="518" rx="45" ry="8" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <text x="485" y="540" text-anchor="middle" font-size="9.5" font-weight="600" fill="#4B5563">Data file</text>
+  <!-- cyl N @755 -->
+  <path d="M710,518 V554 A45,8 0 0 0 800,554 V518" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <ellipse cx="755" cy="518" rx="45" ry="8" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <text x="755" y="540" text-anchor="middle" font-size="9.5" font-weight="600" fill="#4B5563">Data file</text>
+  <!-- snapshots: one point-in-time copy disc under each data file (snapshot-based backups; size-independent restore) -->
+  <path d="M302,560 V567 A38,5 0 0 0 378,567 V560" fill="#F2F4F6" stroke="#8A94A0" stroke-width="1.3"/>
+  <ellipse cx="340" cy="560" rx="38" ry="5" fill="#F2F4F6" stroke="#8A94A0" stroke-width="1.3"/>
+  <path d="M447,560 V567 A38,5 0 0 0 523,567 V560" fill="#F2F4F6" stroke="#8A94A0" stroke-width="1.3"/>
+  <ellipse cx="485" cy="560" rx="38" ry="5" fill="#F2F4F6" stroke="#8A94A0" stroke-width="1.3"/>
+  <path d="M717,560 V567 A38,5 0 0 0 793,567 V560" fill="#F2F4F6" stroke="#8A94A0" stroke-width="1.3"/>
+  <ellipse cx="755" cy="560" rx="38" ry="5" fill="#F2F4F6" stroke="#8A94A0" stroke-width="1.3"/>
+  <!-- long-term log store: destaged by XLOG, NOT by the page servers (no page server sits above it) -->
+  <path d="M895,518 V554 A45,8 0 0 0 985,554 V518" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <ellipse cx="940" cy="518" rx="45" ry="8" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <text x="940" y="539" text-anchor="middle" font-size="9" font-weight="600" fill="#4B5563">Long-term log</text>
+  <text x="340" y="578" text-anchor="middle" font-size="8.5" fill="#6B7280">snapshot</text>
+  <text x="485" y="578" text-anchor="middle" font-size="8.5" fill="#6B7280">snapshot</text>
+  <text x="755" y="578" text-anchor="middle" font-size="8.5" fill="#6B7280">snapshot</text>
+  <text x="940" y="578" text-anchor="middle" font-size="8.5" fill="#6B7280">retained log &#183; roll-forward</text>
+
+  <!-- ====================== PATHWAYS: USER ======================= -->
+  <!-- two-way: request in, result set back -->
+  <path d="M175,92 L175,148" fill="none" stroke="#333333" stroke-width="2" marker-start="url(#mUserUp)" marker-end="url(#mUser)"/>
+  <path d="M400,92 L400,148" fill="none" stroke="#333333" stroke-width="2" marker-start="url(#mUserUp)" marker-end="url(#mUser)"/>
+  <path d="M655,92 L655,148" fill="none" stroke="#333333" stroke-width="2" marker-start="url(#mUserUp)" marker-end="url(#mUser)"/>
+  <text x="183" y="122" font-size="8.5" fill="#333333">read / write</text>
+  <text x="408" y="122" font-size="8.5" fill="#333333">read only</text>
+  <text x="408" y="133" font-size="7.5" fill="#666666">auto-balanced</text>
+  <text x="663" y="122" font-size="8.5" fill="#333333">read only</text>
+  <text x="663" y="133" font-size="7.5" fill="#666666">routed per replica</text>
+
+  <!-- ====================== PATHWAYS: LOG ======================== -->
+  <!-- primary <-> log service: write log down (continuous) / read log tail back up (restart or failover recovery only) -->
+  <path d="M175,258 L175,314 L244,314" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogUp)" marker-end="url(#mLog)"/>
+  <text x="172" y="300" text-anchor="end" font-size="8.5" fill="#C0198C">log write &#183; recovery read</text>
+  <!-- log service disseminates log to the Page servers tier (one-way; targets the tier box, not a single page server) -->
+  <path d="M540,336 L540,356" fill="none" stroke="#C0198C" stroke-width="2" marker-end="url(#mLogDown)"/>
+  <text x="548" y="350" font-size="8.5" fill="#C0198C">log for redo</text>
+  <!-- log service disseminates log to HA + named replicas (one-way, pointing up into each replica) -->
+  <path d="M400,258 L400,292" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogUp)"/>
+  <path d="M655,258 L655,292" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogUp)"/>
+  <path d="M805,258 L805,292" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogUp)"/>
+  <path d="M1135,258 L1135,282 L820,282 L820,292" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogUp)"/>
+  <text x="730" y="276" text-anchor="middle" font-size="8.5" fill="#C0198C">log for redo</text>
+  <!-- XLOG destages log to the long-term log store (two-way: destage write down / restore read up) -->
+  <path d="M830,314 L940,314 L940,508" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogLeft)" marker-end="url(#mLogDown)"/>
+  <text x="948" y="400" font-size="8.5" fill="#C0198C">destage log</text>
+
+  <!-- ===================== PATHWAYS: DATA ======================== -->
+  <!-- page reads (GetPage@LSN) wrap out to the compute tier; two-way (request + page).
+       Each wrap enters the TOP-CENTER of its cluster: every replica (primary + HA + named)
+       issues GetPage@LSN on a local cache miss, so the edge is tier-level, not per-replica. -->
+  <path d="M250,410 L52,410 L52,100 L285,100 L285,112" fill="none" stroke="#0072C6" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#mDataRight)" marker-end="url(#mDataDown)"/>
+  <path d="M830,410 L1246,410 L1246,100 L895,100 L895,112" fill="none" stroke="#0072C6" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#mDataLeft)" marker-end="url(#mDataDown)"/>
+  <text x="46" y="255" transform="rotate(-90 46 255)" text-anchor="middle" font-size="8.5" fill="#0072C6">GetPage@LSN &#183; any replica</text>
+  <text x="1240" y="255" transform="rotate(-90 1240 255)" text-anchor="middle" font-size="8.5" fill="#0072C6">GetPage@LSN &#183; any replica</text>
+  <!-- durable I/O page servers <-> azure storage; two-way (checkpoint write + cold read) -->
+  <path d="M340,452 L340,508" fill="none" stroke="#0072C6" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#mDataUp)" marker-end="url(#mData)"/>
+  <path d="M485,452 L485,508" fill="none" stroke="#0072C6" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#mDataUp)" marker-end="url(#mData)"/>
+  <path d="M755,452 L755,508" fill="none" stroke="#0072C6" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#mDataUp)" marker-end="url(#mData)"/>
+  <text x="505" y="476" font-size="8.5" fill="#0072C6">durable I/O</text>
+
+  <!-- ====================== CONTROL PLANE ======================== -->
+  <!-- Azure Resource Manager = the public control-plane API, left of the Service Fabric bar (outside the data plane) -->
+  <rect x="30" y="600" width="230" height="44" rx="9" fill="#FBF4EA" stroke="#B15C00" stroke-width="2.2"/>
+  <text x="145" y="620" text-anchor="middle" font-size="11" font-weight="700" fill="#8A4600">Azure Resource Manager</text>
+  <text x="145" y="636" text-anchor="middle" font-size="8" fill="#6B4A1F">management API &#183; create &#183; scale &#183; failover</text>
+  <!-- ARM issues management calls into the fabric -->
+  <path d="M260,622 L300,622" fill="none" stroke="#B15C00" stroke-width="2" marker-start="url(#mCtlLeft)" marker-end="url(#mCtlRight)"/>
+  <!-- Service Fabric control-plane bar -->
+  <rect x="300" y="600" width="950" height="44" rx="9" fill="#FBF4EA" stroke="#B15C00" stroke-width="2.2"/>
+  <text x="775" y="620" text-anchor="middle" font-size="13" font-weight="700" fill="#8A4600">CONTROL PLANE &#8212; Service Fabric</text>
+  <text x="775" y="636" text-anchor="middle" font-size="10" fill="#6B4A1F">placement &#183; health &amp; healing &#183; scale &#183; failover &#8212; orchestrates every tier, off the data path</text>
+
+  <!-- SQL engine badge key -->
+  <rect x="60" y="492" width="20" height="11" rx="3" fill="#0072C6"/>
+  <text x="70" y="500.3" text-anchor="middle" font-size="7" font-weight="700" fill="#FFFFFF">SQL</text>
+  <text x="88" y="501" font-size="10" fill="#374151">= SQL Server engine</text>
+
+  <!-- ========================= LEGEND =========================== -->
+  <rect x="30" y="654" width="1220" height="58" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="52" y="670" font-size="12" font-weight="700" fill="#374151">Legend</text>
+  <!-- col 1: pathways (mirror figure: two-way = request / response exchange) -->
+  <path d="M52,684 L88,684" fill="none" stroke="#333333" stroke-width="2" marker-start="url(#mUserLeft)" marker-end="url(#mUser)"/>
+  <text x="96" y="688" font-size="11" fill="#374151">User request (two-way)</text>
+  <path d="M52,702 L88,702" fill="none" stroke="#0072C6" stroke-width="2" stroke-dasharray="6 5" marker-start="url(#mDataLeft)" marker-end="url(#mData)"/>
+  <text x="96" y="706" font-size="11" fill="#374151">Data pathway (GetPage / durable I/O, two-way)</text>
+  <!-- col 2: log pathways -->
+  <path d="M360,684 L396,684" fill="none" stroke="#C0198C" stroke-width="2" marker-end="url(#mLog)"/>
+  <text x="404" y="688" font-size="11" fill="#374151">Log for redo (one-way)</text>
+  <path d="M360,702 L396,702" fill="none" stroke="#C0198C" stroke-width="2" marker-start="url(#mLogLeft)" marker-end="url(#mLog)"/>
+  <text x="404" y="706" font-size="11" fill="#374151">Log write / recovery read (two-way)</text>
+  <!-- components: RBPEX pill + tier swatches -->
+  <rect x="600" y="678" width="22" height="12" rx="6" fill="#FFFFFF" stroke="#008575" stroke-width="1.4"/>
+  <text x="628" y="688" font-size="11" fill="#374151">RBPEX SSD cache</text>
+  <rect x="600" y="696" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#0072C6" stroke-width="2"/>
+  <text x="628" y="706" font-size="11" fill="#374151">Primary compute</text>
+  <rect x="760" y="678" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#107C10" stroke-width="2"/>
+  <text x="788" y="688" font-size="11" fill="#374151">HA replica</text>
+  <rect x="760" y="696" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#5C2D91" stroke-width="2"/>
+  <text x="788" y="706" font-size="11" fill="#374151">Named replica</text>
+  <rect x="920" y="678" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#D83B01" stroke-width="2"/>
+  <text x="948" y="688" font-size="11" fill="#374151">Log service (XLOG)</text>
+  <rect x="920" y="696" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#008575" stroke-width="2"/>
+  <text x="948" y="706" font-size="11" fill="#374151">Page server</text>
+  <rect x="1080" y="678" width="22" height="12" rx="3" fill="#FFFFFF" stroke="#5F6B7A" stroke-width="2"/>
+  <text x="1108" y="688" font-size="11" fill="#374151">Azure Storage</text>
+  <rect x="1080" y="696" width="22" height="12" rx="3" fill="#FBF4EA" stroke="#B15C00" stroke-width="2"/>
+  <text x="1108" y="706" font-size="11" fill="#374151">Control plane (ARM)</text>
+</svg>
