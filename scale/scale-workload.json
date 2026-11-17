@@ -1,0 +1,37 @@
+{
+    "workloads": [
+        {
+            "file": "queries\\portfolio-risk-aggregation.sql",
+            "threads": 8,
+            "iterations": 20
+        },
+        {
+            "file": "queries\\rolling-default-trend.sql",
+            "threads": 4,
+            "iterations": 15
+        },
+        {
+            "file": "queries\\cohort-analysis.sql",
+            "threads": 4,
+            "iterations": 10
+        },
+        {
+            "file": "queries\\delinquency-heatmap.sql",
+            "threads": 4,
+            "iterations": 10
+        },
+        {
+            "file": "queries\\payment-simulation.sql",
+            "threads": 16,
+            "iterations": 50
+        },
+        {
+            "queries": [
+                "SELECT cpu_count, hyperthread_ratio, physical_memory_kb/1024 AS memory_mb, scheduler_count FROM sys.dm_os_sys_info",
+                "SELECT COUNT(*) AS active_requests, AVG(total_elapsed_time) AS avg_elapsed_ms, SUM(granted_query_memory) AS total_granted_pages FROM sys.dm_exec_requests WHERE is_user_process = 1 AND status = 'running'"
+            ],
+            "threads": 1,
+            "iterations": 100
+        }
+    ]
+}

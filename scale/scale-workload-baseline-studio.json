@@ -1,0 +1,31 @@
+{
+  "duration_seconds": 120,
+  "ramp_batch_size": 200,
+  "ramp_delay_ms": 500,
+  "workloads": [
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Loan Eligibility Check — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Trade-Lookup\r\n-- Pure read-only eligibility check: reads applicant profile,\r\n-- checks existing loans, computes DTI and risk tier.\r\n-- No writes — zero latch pressure. CPU-bound at volume.\r\n-- CPU profile: LIGHT per-call, HIGH at volume\r\n-- ============================================================\r\n\r\nDECLARE @id INT = (ABS(CHECKSUM(NEWID())) % (SELECT MAX(ApplicantId) FROM dbo.Applicants)) + 1;\r\nEXEC dbo.usp_LoanEligibility @ApplicantId = @id;"
+      ],
+      "threads": 100,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Loan Application — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Trade-Order\r\n-- Multi-step stored procedure: reads applicant profile,\r\n-- scans LoanTransactions CCI for similar-loan risk analysis\r\n-- (~3.5M rows batch mode), then INSERTs application + decision\r\n-- and UPDATEs applicant record.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: MEDIUM-HEAVY\r\n-- ============================================================\r\n\r\nDECLARE @id INT = (ABS(CHECKSUM(NEWID())) % (SELECT MAX(ApplicantId) FROM dbo.Applicants)) + 1;\r\nEXEC dbo.usp_LoanApplication @ApplicantId = @id;"
+      ],
+      "threads": 46,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Payment Processing — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Trade-Result\r\n-- Reads current loan balance via NC index seek, reads loan\r\n-- terms from LoanHistory, computes interest/principal split,\r\n-- then INSERTs a wide payment record into PaymentProcessingBatch.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: LIGHT (high concurrency)\r\n-- ============================================================\r\n\r\nEXEC dbo.usp_PaymentProcessing;"
+      ],
+      "threads": 28,
+      "think_time_ms": 15,
+      "iterations": 2000
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+    "workloads": [
+        {
+            "file": "queries\\payment-batch-write.sql",
+            "threads": 32,
+            "iterations": 20
+        }
+    ]
+}
