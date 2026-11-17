@@ -1,0 +1,55 @@
+{
+  "duration_seconds": 120,
+  "ramp_batch_size": 200,
+  "ramp_delay_ms": 500,
+  "workloads": [
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Loan Eligibility Check — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Trade-Lookup\r\n-- Pure read-only eligibility check: reads applicant profile,\r\n-- checks existing loans, computes DTI and risk tier.\r\n-- No writes — zero latch pressure. CPU-bound at volume.\r\n-- CPU profile: LIGHT per-call, HIGH at volume\r\n-- ============================================================\r\n\r\nDECLARE @id INT = (ABS(CHECKSUM(NEWID())) % (SELECT MAX(ApplicantId) FROM dbo.Applicants)) + 1;\r\nEXEC dbo.usp_LoanEligibility @ApplicantId = @id;"
+      ],
+      "threads": 100,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Loan Application — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Trade-Order\r\n-- Multi-step stored procedure: reads applicant profile,\r\n-- scans LoanTransactions CCI for similar-loan risk analysis\r\n-- (~3.5M rows batch mode), then INSERTs application + decision\r\n-- and UPDATEs applicant record.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: MEDIUM-HEAVY\r\n-- ============================================================\r\n\r\nDECLARE @id INT = (ABS(CHECKSUM(NEWID())) % (SELECT MAX(ApplicantId) FROM dbo.Applicants)) + 1;\r\nEXEC dbo.usp_LoanApplication @ApplicantId = @id;"
+      ],
+      "threads": 46,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Payment Processing — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Trade-Result\r\n-- Reads current loan balance via NC index seek, reads loan\r\n-- terms from LoanHistory, computes interest/principal split,\r\n-- then INSERTs a wide payment record into PaymentProcessingBatch.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: LIGHT (high concurrency)\r\n-- ============================================================\r\n\r\nEXEC dbo.usp_PaymentProcessing;"
+      ],
+      "threads": 28,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Account Review — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Customer-Position\r\n-- Full account pull: reads applicant profile, joins\r\n-- LoanApplications with LoanDecisions, aggregates transaction\r\n-- history from LoanTransactions (NC index range scans),\r\n-- then INSERTs an audit record.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: MEDIUM\r\n-- ============================================================\r\n\r\nDECLARE @id INT = (ABS(CHECKSUM(NEWID())) % (SELECT MAX(ApplicantId) FROM dbo.Applicants)) + 1;\r\nEXEC dbo.usp_AccountReview @ApplicantId = @id;"
+      ],
+      "threads": 64,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Risk Exposure — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Market-Watch\r\n-- Portfolio-level risk computation: full CCI scan of\r\n-- LoanTransactions (55M rows!) with multi-dimensional\r\n-- aggregation by Region + LoanType. Batch mode parallelism\r\n-- across all available vCores. Then INSERTs a risk snapshot.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: VERY HEAVY (run with 1-2 threads only)\r\n-- ============================================================\r\n\r\nEXEC dbo.usp_RiskExposure;"
+      ],
+      "threads": 9,
+      "think_time_ms": 15,
+      "iterations": 2000
+    },
+    {
+      "queries": [
+        "-- ============================================================\r\n-- Branch Activity — Zava Lending Scale Demo\r\n-- ============================================================\r\n-- TPC-E analog: Broker-Volume\r\n-- Daily activity summary: scans recent LoanTransactions via\r\n-- CCI with date filter (segment elimination), aggregates by\r\n-- Channel + Region, counts recent applications from rowstore,\r\n-- then INSERTs a daily summary record.\r\n-- Must run on PRIMARY — writes prevent read-replica offload.\r\n-- CPU profile: MEDIUM (filtered CCI scan + rowstore scan)\r\n-- ============================================================\r\n\r\nEXEC dbo.usp_BranchActivity;"
+      ],
+      "threads": 3,
+      "think_time_ms": 15,
+      "iterations": 2000
+    }
+  ]
+}

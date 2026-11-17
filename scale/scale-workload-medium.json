@@ -1,0 +1,38 @@
+{
+    "duration_seconds": 120,
+    "ramp_batch_size": 200,
+    "ramp_delay_ms": 500,
+    "workloads": [
+        {
+            "file": "queries\\loan-eligibility.sql",
+            "threads": 200,
+            "think_time_ms": 15
+        },
+        {
+            "file": "queries\\loan-application.sql",
+            "threads": 93,
+            "think_time_ms": 15
+        },
+        {
+            "file": "queries\\payment-processing.sql",
+            "threads": 55,
+            "think_time_ms": 15
+        },
+        {
+            "file": "queries\\account-review.sql",
+            "threads": 128,
+            "think_time_ms": 15
+        },
+        {
+            "file": "queries\\risk-exposure.sql",
+            "threads": 18,
+            "think_time_ms": 15
+        },
+        {
+            "file": "queries\\branch-activity.sql",
+            "threads": 6,
+            "think_time_ms": 15
+        }
+    ]
+}
+

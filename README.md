@@ -108,6 +108,24 @@ following in one database, behind one SQL surface:
 
 ---
 
+## Additional Hyperscale Examples
+
+These standalone Caldova examples complement the Zava Lending workshop; they do not
+require `ZavaLendingDB`. Each folder has its own prerequisites, deployment instructions,
+and runbook. Azure deployments incur charges; review the instructions before running.
+
+| Example | What it demonstrates |
+|---------|----------------------|
+| [Caldova Evidence Agent](caldovaevidenceagent/README.md) | A biomedical evidence agent combining Hyperscale native embeddings and DiskANN vector search, governed SQL MCP tools through Data API builder, and a Microsoft Foundry hosted agent. |
+| [Caldova Research](caldovaresearch/README.md) | Evidence search from a small serverless pilot to a one-million-row vector-search target, with independently sized named replicas for read scale-out. |
+| [Hands-Free Indexing](handsfreeindexing/README.md) | Azure SQL automatic index creation followed by Automatic Index Compaction, with live query and index-health measurements. Requires access to the compaction preview. |
+| [Start and Grow Hyperscale](startandgrowhyperscale/README.md) | A scheduling application that starts on serverless Hyperscale and grows into an elastic pool, with native cross-database queries across providers. The README distinguishes live operations from opt-in presentation illustrations. |
+
+The two evidence-search examples include a public, CC BY-licensed article corpus.
+See [third-party notices](THIRD-PARTY-NOTICES.md) for attribution and licensing.
+
+---
+
 ## The app — front-ends you can open
 
 The database powers a lending platform with self-contained web front-ends (static HTML — open
